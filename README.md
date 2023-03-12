@@ -1,6 +1,5 @@
- Projektarbeit „Interaktive Visualisierung & Internet“ im Modul P0006
 
-- [Aufgabestellung](#ueberschriften)
+- [Aufgabestellung](#Aufgabestellung)
 - [Texte formatieren](#texte)
     - [Font-Formate](#formate)
     - [Hoch-/Tief-Stellen von Texten](#sub)
@@ -15,12 +14,11 @@
 - [Zitieren](#zitieren) (in REX auch Hinweise)
 - [Bilder](#images)
 
-Die Markdown-Vorlage soll dabei helfen bessere README-Dateien zu schreiben. Eine gut geschriebene Dokumentation vermittelt Kompetenz und hilft dabei Code und Datenanalysen besser zu verstehen.
-
-- **Demo:** [Original README-Vorlage bei Github](https://github.com/digitalegarage/open-source-guidelines/blob/master/README-template.md)
+Die Github Seite für die Projektarbeit „Interaktive Visualisierung & Internet“ im Modul P0006
 
 ## Aufgabestellung
 ### Topic
+Suchen Sie sich einen Topic, den Sie kreativ darstellen möchten
 - Haltestellen, POIs, Restaurants, Verteilung Arbeitslose, Altersstruktur, ... Eigene Ideen?
 
 ### Teil Neis
@@ -64,15 +62,6 @@ Hervorhebungen lassen sich in Markdown folgendermaßen gestalten:
 
 - **Text fett**: `**fett**`
 - *Text kursiv*: `*fett*`
-
-Außerdem gibt es verschiedene Überschriften:
-
-# H1
-## H2
-### H3
-#### H4
-##### H5
-###### H6
 
 Die Überschriften unterscheiden sich jeweils durch die Anzahl der vorangestellten Rauten `## H2`.
 
@@ -129,4 +118,5 @@ Manchmal funktioniert der Markdown-Renderer nicht. In diesem Fall hilft meistens
 
 - Philosophie: [Art of README](https://github.com/noffle/art-of-readme)
 - Markdown-Beispiele von [Github Markdown](https://guides.github.com/features/mastering-markdown/) und [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+- **Demo:** [Original README-Vorlage bei Github](https://github.com/digitalegarage/open-source-guidelines/blob/master/README-template.md)
 
