@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>My Map</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <!-- include leaflet css and js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+    <style>
+        #map {
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+<div id='map'></div>
+<script>
+    let map = L.map('map').setView([49.9929, 8.2473], 14);
+
+    // Add OpenStreetMap as the first base layer
+    let osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+        maxZoom: 18
+    }).addTo(map);
+
+    // Add RLP Geoportal WMS as the second base layer
+    let rlpLayer = L.tileLayer.wms('https://www.geoportal.rlp.de/geodienste_karten/wms_vg2500', {
+        layers: 'vg2500',
+        format: 'image/png',
+        transparent: true
+    }).addTo(map);
+
+    // Create a layer control for switching between the two base layers
+    let baseLayers = {
+        'L1: OpenStreetMap': osmLayer,
+        'L2: RLP Geoportal WMS': rlpLayer
+    };
+    L.control.layers(baseLayers).addTo(map);
+</script>
+</body>
+</html>
