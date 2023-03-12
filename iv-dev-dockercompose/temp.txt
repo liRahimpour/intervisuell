@@ -1,0 +1,212 @@
+version: '3.8'
+
+services:
+
+  boss-postgres:
+    build: ../boss-dev-postgres
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - boss-network
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: db
+    volumes:
+      - ${DATAVOLUME}
+    restart: unless-stopped
+
+  boss-smtp:
+    build: ../boss-dev-smtpserver
+    container_name: smtp
+    ports:
+      - "1025:1025"
+      - "9090:1080"
+    networks:
+      - boss-network
+
+  boss-secsign:
+    build: ../boss-secsign
+    container_name: secsign
+    ports:
+      - "8080:8080"
+    networks:
+      - boss-network
+    environment:
+      - BOSS_SECSIGN_HTTP_PORT=8080
+      - BOSS_SMTP_HOST=smtp:1025
+
+  boss-elasticsearch:
+    build:
+      context: ../boss-nuxeo
+      dockerfile: DockerfileElasticSearch
+    container_name: elasticsearch
+    environment:
+      - node.name=es01
+      - node.master=true
+      - node.data=true
+      - cluster.name=es-docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ${ELSDATAVOLUME01}
+    ports:
+      - "9200:9200"
+    networks:
+      - boss-network
+
+  boss-nuxeo:
+    build:
+      context: ../boss-nuxeo
+      dockerfile: DockerfileNuxeo
+    container_name: nuxeo
+    depends_on:
+      - boss-elasticsearch
+      - boss-postgres
+    restart: always
+    ports:
+      - "9080:9080"
+    networks:
+      - boss-network
+    environment:
+      - NUXEO_CLID=avalid\nclid
+      - NUXEO_DATA=/data/nuxeo/data/
+      - NUXEO_LOG=/data/nuxeo/log/
+      - NUXEO_DB_TYPE=postgresql
+      - NUXEO_DB_HOST=postgres
+      - NUXEO_DB_NAME=dms
+      - NUXEO_DB_USER=nuxeo
+      - NUXEO_DB_PASSWORD=start
+      - NUXEO_ES_HOSTS=http://elasticsearch:9200
+      - NUXEO_ES_CLUSTER_NAME=es-docker-cluster
+      - NUXEO_ES_NODE_NAME=es01
+      - NUXEO_URL=https://nuxeo:9080/nuxeo
+    volumes:
+      - ${NUXEODATAVOLUME}
+    healthcheck:
+      test: "curl -f -k https://nuxeo:9080 || false"
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  boss-activemq:
+    build: ../boss-activemq
+    container_name: activemq
+    ports:
+      - "61616:61616"
+      - "8161:8161"
+    networks:
+      - boss-network
+
+  # may run in multiple instances
+  boss-portfoliomanagement:
+    build: ../boss-components/boss-be-portfoliomgmt
+#    container_name: portfoliomanagement
+    ports:
+      - "9101"
+    networks:
+      - boss-network
+    environment:
+      - BOSS_SECSIGN_HTTP_PORT=8080
+
+  # may run in multiple instances
+  boss-custodianintegration:
+    build: ../boss-components/boss-be-custodianintegration
+#    container_name: custodianintegration
+    ports:
+      - "9105"
+    networks:
+      - boss-network
+    environment:
+      - BOSS_SECSIGN_HTTP_PORT=8080
+
+  boss-portfoliomanagement-webdav:
+    build: ../boss-components/boss-be-portfoliomgmt-webdav
+    container_name: portfoliomanagement-webdav
+    ports:
+      - "9107:9107"
+    networks:
+      - boss-network
+
+  boss-portfoliomanagement-fix:
+    build: ../boss-components/boss-be-portfoliomgmt-fix
+    container_name: portfoliomanagement-fix
+    ports:
+      - "5001:5001"
+    networks:
+      - boss-network
+
+  # may run in multiple instances
+  boss-timeline:
+    build: ../boss-components/boss-be-timeline
+#    container_name: timeline
+    ports:
+      - "9102"
+    networks:
+      - boss-network
+    environment:
+      - BOSS_SECSIGN_HTTP_PORT=8080
+
+  # may run in multiple instances
+  boss-userservice:
+    build: ../boss-components/boss-be-userservice
+#    container_name: userservice
+    ports:
+      - "9103"
+    networks:
+      - boss-network
+    environment:
+      - BOSS_SECSIGN_HTTP_PORT=8080
+
+  # may run in multiple instances
+  boss-postbox:
+    build: ../boss-components/boss-be-postbox
+#    container_name: postbox
+    depends_on:
+      - boss-nuxeo
+    ports:
+      - "9104"
+    networks:
+      - boss-network
+    environment:
+      - BOSS_SECSIGN_HTTP_PORT=8080
+
+  boss-reverseproxy:
+    build: ../boss-dev-reverseproxy
+    container_name: reverseproxy
+    ports:
+      - "9198:80"
+      - "9199:443"
+    networks:
+      - boss-network
+    depends_on:
+      - boss-postbox
+
+  boss-userportal:
+    build: ../boss-components/boss-fe-userportal
+    container_name: userportal
+    depends_on:
+      - boss-portfoliomanagement
+      - boss-timeline
+      - boss-userservice
+      - boss-postbox
+    ports:
+      - "9100:443"
+    networks:
+      - boss-network
+    depends_on:
+      - boss-reverseproxy
+
+volumes:
+  postgres-data:
+  data01:
+
+networks:
+  boss-network:
+    external: true

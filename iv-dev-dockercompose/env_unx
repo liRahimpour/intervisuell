@@ -1,0 +1,1 @@
+export DATAVOLUME=~/pg_in_docker/data:/var/lib/postgresql/data
