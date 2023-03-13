@@ -210,3 +210,80 @@ volumes:
 networks:
   boss-network:
     external: true
+
+
+
+
+http {
+    upstream backend {
+        server localhost:8081;
+        server localhost:9000;
+    }
+
+    server {
+        listen 80;
+        server_name intervisuell.com;
+
+        location / {
+            proxy_pass http://localhost:8081;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+        }
+
+        location /portainer {
+            proxy_pass http://localhost:9000;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+        }
+
+        location /app2 {
+            proxy_pass http://localhost:8002;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+        }
+
+        location /app3 {
+            proxy_pass http://localhost:8003;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+        }
+    }
+
+
+
+
+
+user  nginx;
+worker_processes  auto;
+
+error_log  /var/log/nginx/error.log warn;
+pid        /var/run/nginx.pid;
+
+
+events {
+    worker_connections  1024;
+}
+http {
+upstream intervisuell {
+  server iv-portal:80;
+}
+
+upstream intervisuell_2 {
+    server iv-portal_2:80;
+  }
+
+  server {
+    listen 80;
+
+    location / {
+      proxy_pass http://intervisuell;
+      proxy_set_header Host $host;
+      proxy_set_header X-Real-IP $remote_addr;
+    }
+    location /portal-2 {
+          proxy_pass http://intervisuell_2;
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+        }
+  }
+}
