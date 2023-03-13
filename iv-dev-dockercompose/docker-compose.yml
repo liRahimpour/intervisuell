@@ -17,6 +17,17 @@ services:
       - ${DATAVOLUME}
     restart: unless-stopped
 
+  intervisuell-portal:
+    build: ../iv-portal
+    container_name: iv-portal
+    depends_on:
+      - intervisuell-postgres
+    restart: always
+    ports:
+      - "8081:80"
+    networks:
+      - iv-network
+
 volumes:
   postgres-data:
   data01:
