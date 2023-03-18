@@ -28,16 +28,25 @@ services:
     networks:
       - iv-network
 
-  intervisuell-reverseproxy:
-    build: ../iv-dev-reverseproxy
-    container_name: iv-reverseproxy
-    ports:
-      - "8082:80"
-    networks:
-      - iv-network
-    depends_on:
-       - intervisuell-postgres
-       - intervisuell-portal
+  intervisuell-backend:
+      build: ../intervisuell
+      container_name: iv-backend
+      ports:
+        - "8083:8083"
+      networks:
+        - iv-network
+
+  #intervisuell-reverseproxy:
+   # build: ../iv-dev-reverseproxy
+    #container_name: iv-reverseproxy
+    #ports:
+     # - "8082:80"
+    #networks:
+     # - iv-network
+    #depends_on:
+     #  - intervisuell-postgres
+      # - intervisuell-portal
+
 
 volumes:
   postgres-data:

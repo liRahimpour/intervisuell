@@ -1,0 +1,15 @@
+server:
+  port: 8083
+
+spring:
+  datasource:
+    url: jdbc:postgresql://iv-postgres:5432/db
+    username: admin
+    password: admin
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
