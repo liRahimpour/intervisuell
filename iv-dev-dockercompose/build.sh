@@ -26,7 +26,6 @@ echo " "
 . ./env_unx
 
 sep "maven build backend"
-
 # maven build backend
 cd ../intervisuell || exit
 mvn clean install -DskipTests
@@ -38,6 +37,7 @@ else
   exit
 fi
 
+sep "create iv-network if not exists for Docker environment"
 # create iv-network if not exists for Docker environment
 if [ -z "$(docker network ls --filter name=^iv-network$ --format='{{ .Name }}')" ]
 then
