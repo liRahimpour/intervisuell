@@ -1,42 +1,139 @@
 <!DOCTYPE html>
-<html>
+<html xml:lang lang="">
 <head>
-    <meta charset='utf-8' />
+    <meta charset='utf-8'/>
     <title>My Map</title>
-    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no'/>
     <!-- include leaflet css and js -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.6.0/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.Default.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.6.0/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.3.0/dist/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
     <style>
         #map {
             height: 100vh;
         }
     </style>
+
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
 </head>
 <body>
-<div id='map'></div>
+
+<div id='map' ></div>
 <script>
-    let map = L.map('map').setView([49.9929, 8.2473], 14);
+    let map = L.map('map').setView([49.9929, 8.2473], 13);
+
+    const stamenWatercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.png', {
+        attribution: 'Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL.',
+        subdomains: 'abcd',
+        transparent: true,
+        minZoom: 1,
+        maxZoom: 15
+    });
+
+    const esriImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Map data &copy; <a href="https://www.esri.com/">Esri</a>',
+        transparent: true,
+        minZoom: 1,
+        maxZoom: 22
+    });
 
     // Add OpenStreetMap as the first base layer
-    let osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    let detaillierteKarte = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
-        maxZoom: 18
+        transparent: true,
+        minZoom: 1,
+        maxZoom: 20
+    });
+
+    const stamenTerrain = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png', {
+        attribution: 'Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL.',
+        subdomains: 'abcd',
+        transparent: true,
+        minZoom: 0,
+        maxZoom: 20
+    });
+
+    const cartoVoyager = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+        attribution: 'Map tiles by Carto, under CC BY 3.0. Data by OpenStreetMap, under ODbL.',
+        subdomains: 'abcd',
+        minZoom: 0,
+        maxZoom: 22
     }).addTo(map);
 
-    // Add RLP Geoportal WMS as the second base layer
-    let rlpLayer = L.tileLayer.wms('https://www.geoportal.rlp.de/geodienste_karten/wms_vg2500', {
-        layers: 'vg2500',
+
+    const waterways = L.tileLayer.wms("http://localhost:8084/geoserver/wms", {
+        layers: 'rlp:gis_osm_waterways_free_1',
         format: 'image/png',
-        transparent: true
-    }).addTo(map);
+        transparent: true,
+        minZoom: 1,
+        maxZoom: 20,
+        attribution: "Geoserver Layer",
+    });
+
+    const wc = L.tileLayer.wms('http://localhost:8084/geoserver/wms', {
+        layers: 'wc-mainz:export-point',
+        format: 'image/png',
+        minZoom: 1,
+        maxZoom: 20,
+        transparent: true,
+        attribution: '... </a>',
+    });
+
+    const Bars = L.tileLayer.wms('http://localhost:8084/geoserver/wms', {
+        layers: 'wc-mainz:BarsInMainz_1-point',
+        format: 'image/png',
+        minZoom: 1,
+        maxZoom: 20,
+        transparent: true,
+        attribution: '... </a>'
+
+    });
+
+    // Marker zur Karte hinzufügen
+    const myIcon = L.AwesomeMarkers.icon({
+        icon: 'star',
+        markerColor: 'red',
+        prefix: 'fa'
+    });
+
+    const redMarker = L.AwesomeMarkers.icon({
+        icon: 'coffee',
+        iconColor: 'black',
+        prefix: 'fa',
+        markerColor: 'red'
+    });
+
+
+
+
+
 
     // Create a layer control for switching between the two base layers
     let baseLayers = {
-        'L1: OpenStreetMap': osmLayer,
-        'L2: RLP Geoportal WMS': rlpLayer
+        'Watercolor': stamenWatercolor,
+        'Satellit': esriImagery,
+        'Karte': detaillierteKarte,
+        'Terrain': stamenTerrain,
+        'Minimal': cartoVoyager
     };
-    L.control.layers(baseLayers).addTo(map);
+
+    let Overlays = {
+        'Wasserwege': waterways,
+        'Oeffentliche Toiletten': wc,
+        'Bars in Mainz': Bars
+    };
+    L.control.layers(baseLayers, Overlays).addTo(map);
+    L.marker([49.9929, 8.2473], {icon: myIcon}).addTo(map);
+    L.marker([49.9940, 8.2590]).addTo(map);
+    L.marker([49.9929, 8.2373], {icon: redMarker}).addTo(map);
+
 </script>
 </body>
 </html>

@@ -287,3 +287,83 @@ upstream intervisuell_2 {
         }
   }
 }
+
+
+
+<!--
+    // Hinzufügen des "toner" WMS-Base-Layers von Stamen Maps
+    L.tileLayer.wms('http://tile.stamen.com/toner/{z}/{x}/{y}.png', {
+        layers: 'toner-lite', // Name der WMS-Schicht
+        format: 'image/png', // Bildformat
+        transparent: true, // Transparenz aktivieren
+        attribution: '© Stamen Maps' // Anbieter der Schicht
+    }).addTo(map2);
+
+
+
+    Stamen Terrain: A beautiful, detailed terrain map with hill shading and natural features. To add this layer to your map, use the following code:
+    rust
+    Copy code
+    const stamenTerrain = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png', {
+        attribution: 'Map data &copy; <a href="https://stamen.com/">Stamen</a> contributors'
+    }).addTo(map);
+    CartoDB Positron: A modern, minimalistic base layer with high contrast and simple colors. To add this layer to your map, use the following code:
+    rust
+    Copy code
+    const cartoPositron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: 'Map data &copy; <a href="https://carto.com/">CartoDB</a> contributors'
+    }).addTo(map);
+    OpenTopoMap: A topographic map with contour lines and shading, ideal for hiking and outdoor activities. To add this layer to your map, use the following code:
+    rust
+    Copy code
+    const openTopoMap = L.tileLayer('https://tile.opentopomap.org/{z}/{x}/{y}.png', {
+        attribution: 'Map data &copy; <a href="https://opentopomap.org/">OpenTopoMap</a> contributors'
+    }).addTo(map);
+    You can also explore other base layers on websites such as OpenStreetMap or Mapbox, and customize their styles to fit your needs.
+
+
+
+
+    Ali Rahimpour
+    andere beispiele von mapbox bitte
+    Sure! Here are a few other Mapbox base layers you can use in your Leaflet map:
+
+    Mapbox Satellite Streets: A hybrid layer that combines satellite imagery with street and label information.
+
+
+
+    const satelliteStreets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v11/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: 'YOUR_MAPBOX_ACCESS_TOKEN'
+    }).addTo(map);
+    Mapbox Outdoors: A detailed terrain map with contour lines, hill shading, and natural features.
+
+
+
+    const outdoors = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/outdoors-v11/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: 'YOUR_MAPBOX_ACCESS_TOKEN'
+    }).addTo(map);
+    Mapbox Dark: A dark, high-contrast base layer that is ideal for displaying data with bright colors.
+
+
+
+    const dark = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/dark-v10/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: 'YOUR_MAPBOX_ACCESS_TOKEN'
+    }).addTo(map);
+    Remember to replace YOUR_MAPBOX_ACCESS_TOKEN with your own Mapbox access token. You can find more Mapbox styles and documentation on the Mapbox website.
+
+
+
+cooooooleeee
+
+const stamenWatercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.png', {
+        attribution: 'Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL.',
+        subdomains: 'abcd',
+        minZoom: 1,
+        maxZoom: 16
+    }).addTo(map2);

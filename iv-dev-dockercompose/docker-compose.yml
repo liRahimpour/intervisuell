@@ -2,31 +2,16 @@ version: '3.8'
 
 services:
 
-  intervisuell-postgres:
-    build: ../iv-dev-postgres
-    container_name: iv-postgres
-    ports:
-      - "5432:5432"
-    networks:
-      - iv-network
-    environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
-      POSTGRES_DB: db
-    volumes:
-      - ${DATAVOLUME}
-    restart: unless-stopped
-
   intervisuell-portal:
     build: ../iv-portal
     container_name: iv-portal
-    depends_on:
-      - intervisuell-postgres
     restart: always
     ports:
       - "8081:80"
     networks:
       - iv-network
+    depends_on:
+      - intervisuell-postgres
 
   intervisuell-backend:
       build: ../intervisuell
@@ -35,6 +20,29 @@ services:
         - "8083:8083"
       networks:
         - iv-network
+      #depends_on:
+      #  - intervisuell-postgres
+      #command: sh -c "/wait-for-it.sh intervisuell-postgres:5432 -- flask run"
+
+  intervisuell-geoserver:
+      build: ../iv-geoserver
+      container_name: iv-geoserver
+      hostname: iv-geoserver
+      ports:
+       - 8084:8080
+      networks:
+       - iv-network
+      volumes:
+        - ${GEOSERVER_DATA_DIR}
+      environment:
+        - EXTRA_JAVA_OPTS=-Xms1g -Xmx2g
+        - USE_VECTOR_TILES=0
+        - USE_CORS=0
+        - GEOSERVER_ADMIN_USER=${GEOSERVER_ADMIN_USER}
+        - GEOSERVER_ADMIN_PASSWORD=${GEOSERVER_ADMIN_PASSWORD}
+      depends_on:
+        - intervisuell-postgres
+        - intervisuell-backend
 
   #intervisuell-reverseproxy:
    # build: ../iv-dev-reverseproxy
@@ -47,10 +55,24 @@ services:
      #  - intervisuell-postgres
       # - intervisuell-portal
 
+  intervisuell-postgres:
+    build: ../iv-dev-postgres
+    container_name: iv-postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - iv-network
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - ${DATAVOLUME}
+    restart: unless-stopped
+
 
 volumes:
   postgres-data:
-  data01:
 
 networks:
   iv-network:
