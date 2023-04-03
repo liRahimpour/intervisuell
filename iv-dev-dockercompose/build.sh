@@ -30,7 +30,6 @@ echo " "
 #set environment
 . ./env_unx
 
-
 sep "maven build backend"
 # maven build backend
 cd ../intervisuell || exit
@@ -89,3 +88,21 @@ for VOL in $VOLUMES; do
   fi
 done
 
+
+#sep "create geodata Dir "
+#cd ../iv-dev-postgres || exit
+#if [ ! -d "/pg_in_docker/data/geodata/" ];
+#then
+#  mkdir ./pg_in_docker/scripts
+#  mkdir ./pg_in_docker/geodata
+#  sep "geodata Dir created"
+#else
+#  sep "geodata Dir already exists, skipping creation."
+#fi
+
+
+#cp ./scripts/*.sh ./pg_in_docker/scripts/
+#chmod +x ./pg_in_docker/scripts/*.sh
+
+#docker exec iv-postgres /var/lib/postgresql/data/scripts/installOgr2ogr.sh
+#docker exec iv-postgres /var/lib/postgresql/data/scripts/importshp.sh

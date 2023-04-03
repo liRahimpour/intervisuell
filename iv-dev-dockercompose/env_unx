@@ -1,5 +1,4 @@
-export DATAVOLUME=../iv-dev-postgres/pg_in_docker/data:/var/lib/postgresql/data
-export GEOSERVER_VERSION=2.21.4
+export DATAVOLUME=../iv-dev-postgres/pg_in_docker/:/var/lib/postgresql/data
 export GEOSERVER_DATA_DIR=../iv-geoserver/geoserver-data:/opt/geoserver_data/:Z
 export POSTGRES_USER=admin
 export POSTGRES_PASSWORD=admin
