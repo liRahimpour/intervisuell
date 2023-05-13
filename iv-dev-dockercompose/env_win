@@ -1,3 +1,4 @@
 DATAVOLUME=c:/pg_in_docker/data:/var/lib/postgresql/data
 
 
+$ brew install wget
