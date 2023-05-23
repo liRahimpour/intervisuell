@@ -144,3 +144,8 @@ Weitere Anmerkungen oder Informationen, die für das Projekt relevant sind.
 Liste möglicher Probleme, auf die Benutzer stoßen könnten, sowie Anleitungen, um sie zu beheben.
 
 Wir hoffen, dass diese README-Datei Ihnen dabei helfen wird, Ihr Projekt zu veröffentlichen und zu teilen!
+
+
+docker run --name myXampp -p 41061:22 -p 41062:80 -d -v ~/my_web_pages:/www tomsik68/xampp:8
+http://localhost:41062/dashboard/
+https://hub.docker.com/r/tomsik68/xampp/

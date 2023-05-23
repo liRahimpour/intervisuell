@@ -1,0 +1,14 @@
+{
+    "Servers": {
+        "1": {
+            "Name": "iv-postgres",
+            "Group": "Servers",
+            "Host": "host.docker.internal",
+            "Port": 5432,
+            "MaintenanceDB": "db",
+            "Username": "admin",
+            "PassFile": "/pgpass",
+            "SSLMode": "prefer"
+        }
+    }
+}

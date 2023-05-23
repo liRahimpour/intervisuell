@@ -11,7 +11,7 @@ services:
     networks:
       - iv-network
     depends_on:
-      - intervisuell-postgres
+      - "intervisuell-postgres"
 
   intervisuell-backend:
       build: ../intervisuell
@@ -20,9 +20,8 @@ services:
         - "8083:8083"
       networks:
         - iv-network
-      #depends_on:
-      #  - intervisuell-postgres
-      #command: sh -c "/wait-for-it.sh intervisuell-postgres:5432 -- flask run"
+      depends_on:
+        - "intervisuell-postgres"
 
   intervisuell-geoserver:
       build: ../iv-geoserver
@@ -41,19 +40,8 @@ services:
         - GEOSERVER_ADMIN_USER=${GEOSERVER_ADMIN_USER}
         - GEOSERVER_ADMIN_PASSWORD=${GEOSERVER_ADMIN_PASSWORD}
       depends_on:
-        - intervisuell-postgres
-        - intervisuell-backend
-
-  #intervisuell-reverseproxy:
-   # build: ../iv-dev-reverseproxy
-    #container_name: iv-reverseproxy
-    #ports:
-     # - "8082:80"
-    #networks:
-     # - iv-network
-    #depends_on:
-     #  - intervisuell-postgres
-      # - intervisuell-portal
+        - "intervisuell-postgres"
+        - "intervisuell-backend"
 
   intervisuell-postgres:
     build: ../iv-dev-postgres
@@ -70,6 +58,22 @@ services:
       - ${DATAVOLUME}
     restart: unless-stopped
 
+  intervisuell-pgadmin:
+    container_name: iv-pgadmin
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_ADMIN_USER}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_ADMIN_PASSWORD}
+    ports:
+      - "8082:80"
+    networks:
+       - iv-network
+    volumes:
+       - ./servers.json:/pgadmin4/servers.json # preconfigured servers/connections
+       - ./pgpass:/pgpass # passwords for the connections in this file
+    depends_on:
+       - "intervisuell-postgres"
 
 volumes:
   postgres-data:
