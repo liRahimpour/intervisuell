@@ -12,6 +12,7 @@ services:
       - iv-network
     depends_on:
       - "intervisuell-postgres"
+      - "intervisuell-backend"
 
   intervisuell-backend:
       build: ../intervisuell

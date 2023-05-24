@@ -8,8 +8,22 @@ spring:
     password: admin
     driver-class-name: org.postgresql.Driver
   jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database-platform: org.hibernate.dialect.PostgreSQL95Dialect
     hibernate:
       ddl-auto: update
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+logging:
+  level:
+    root: INFO
+    org.springframework.web: ERROR
+    org.hibernate: ERROR
+
+#spring.datasource.url: Die URL für die Verbindung zur PostgreSQL-Datenbank. Hier wird der Hostname iv-postgres, der Port 5432 und der Name der Datenbank db angegeben.
+#spring.datasource.username: Der Benutzername für die Datenbankverbindung.
+#spring.datasource.password: Das Passwort für die Datenbankverbindung.
+#spring.datasource.driver-class-name: Der vollqualifizierte Klassenname des JDBC-Treibers, der für die Verbindung zur PostgreSQL-Datenbank verwendet werden soll.
+#spring.jpa.database-platform: Der vollqualifizierte Klassenname des Hibernate-Dialekts, der für die PostgreSQL-Datenbank verwendet werden soll. Hier wird der Dialekt org.hibernate.spatial.dialect.postgis.PostgisDialect angegeben, der speziell für PostgreSQL mit dem PostGIS-Erweiterung verwendet wird.
+#spring.jpa.hibernate.ddl-auto: Die Option zur Konfiguration des Hibernate-Schemas. Hier wird "update" angegeben, was bedeutet, dass Hibernate das Schema automatisch aktualisieren soll, um den aktuellen Stand der Entitätsklassen abzubilden.
+#spring.jpa.hibernate.naming.physical-strategy: Der vollqualifizierte Klassenname der physischen Namensstrategie von Hibernate. Hier wird die Standardimplementierung org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl angegeben, die die physischen Tabellennamen unverändert lässt.
