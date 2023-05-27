@@ -13,8 +13,9 @@
     <script src="https://unpkg.com/leaflet.markercluster@1.3.0/dist/leaflet.markercluster.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
-
-
+    <!-- leaflet locate plugin -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.js" charset="utf-8"></script>
     <!--bootstrape css-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -176,7 +177,23 @@
                 L.marker([49.9940, 8.2590]).addTo(map);
                 L.marker([49.9929, 8.2373], {icon: redMarker}).addTo(map);
 
+                <!--location-->
+                L.control.locate(
+                    {
 
+                        returnToPrevBounds: true,
+                        flyTo: true,
+                        position: "bottomright",
+                        strings: {
+                            title: "Show me where I am, yo!"
+                        },
+                        showCompass: true,
+                        markerClass: L.marker,
+
+
+                    }
+
+                ).addTo(map);
 
             </script>
         </div>
