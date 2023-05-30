@@ -1,26 +1,3 @@
-create table if not exists bike_rental
-(
-
-    id         bigint not null
-        constraint bike_rental_pkey
-            primary key,
-    amenity    varchar(255),
-    bicycle_re varchar(255),
-    capacity   varchar(255),
-    the_geom   geometry,
-    name       varchar(255),
-    opening_ho varchar(255),
-    operator   varchar(255),
-    rating     real   not null
-        constraint bike_rental_rating_check
-            check ((rating >= (1)::double precision) AND (rating <= (5)::double precision)),
-    website    varchar(255)
-);
-
-alter table bike_rental
-    owner to admin;
-
-
 INSERT INTO public.bike_rental (id, amenity, bicycle_re, capacity, the_geom, name, opening_ho, operator, rating,
                                 website)
 VALUES (1, 'bicycle_rental', 'docking_station', '24', '010100000007F5EB4793471B41B3175FC350215541',

@@ -15,9 +15,12 @@ public class BikeRentalServiceImpl implements BikeRentalService {
     private BikeRentalRepository bikeRentalRepository;
 
     public List<BikeRental> findAll() {
-        /*save_csv();*/
-
         return bikeRentalRepository.findAll();
+    }
+
+    @Override
+    public List<BikeRental> bikeRentalSearchAfterRating(float rating) {
+        return bikeRentalRepository.findBikeRentalsByRatingGreaterThanEqual(rating);
     }
 
 }

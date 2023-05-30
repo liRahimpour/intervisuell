@@ -11,15 +11,20 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
-public class TestController {
+public class BikeRentalController {
 
     @Autowired
     BikeRentalServiceImpl bikeRentalService;
-    Logger logger = LoggerFactory.getLogger(TestController.class);
+    Logger logger = LoggerFactory.getLogger(BikeRentalController.class);
 
     @GetMapping("/bike_rentals")
     List<BikeRental> getAllBikeRentals() {
         return bikeRentalService.findAll();
+    }
+
+    @GetMapping("/rating")
+    List<BikeRental> getBikeRentalsWithRating(@RequestParam("rating") float rating) {
+        return bikeRentalService.bikeRentalSearchAfterRating(rating);
     }
 
 }

@@ -1,7 +1,7 @@
 FROM postgis/postgis:latest
 
 # Kopieren des SQL-Skripts in den Container
-#COPY initdb/init.sql /docker-entrypoint-initdb.d/
+COPY initdb/init-db.sql /docker-entrypoint-initdb.d/
 
 # Optional: Kopieren von anderen Dateien oder Skripten, die für die Initialisierung benötigt werden
 
