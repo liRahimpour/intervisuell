@@ -13,6 +13,7 @@ services:
     depends_on:
       - "intervisuell-postgres"
       - "intervisuell-backend"
+      - "intervisuell-geoserver"
 
   intervisuell-backend:
       build: ../intervisuell
@@ -22,6 +23,7 @@ services:
       networks:
         - iv-network
       depends_on:
+        - "intervisuell-geoserver"
         - "intervisuell-postgres"
 
   intervisuell-geoserver:
@@ -42,7 +44,6 @@ services:
         - GEOSERVER_ADMIN_PASSWORD=${GEOSERVER_ADMIN_PASSWORD}
       depends_on:
         - "intervisuell-postgres"
-        - "intervisuell-backend"
 
   intervisuell-postgres:
     build: ../iv-dev-postgres
@@ -57,6 +58,7 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - ${DATAVOLUME}
+
     restart: unless-stopped
 
   intervisuell-pgadmin:
