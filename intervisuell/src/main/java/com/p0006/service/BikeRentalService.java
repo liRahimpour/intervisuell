@@ -1,4 +1,3 @@
-/*
 package com.p0006.service;
 
 import com.p0006.entity.BikeRental;
@@ -9,4 +8,3 @@ public interface BikeRentalService {
 
 	List<BikeRental> findAll();
 }
-*/

@@ -2,6 +2,7 @@ package com.p0006.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.URL;
 import org.locationtech.jts.geom.Point;
 
@@ -36,4 +37,7 @@ public class BikeRental implements Serializable {
     private String operator;
     @URL
     private String website;
+    @Range(min = 1, max = 5)
+    @Column(nullable = false)
+    private float rating;
 }
