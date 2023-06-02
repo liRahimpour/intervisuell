@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
-@RequestMapping("/api/v1")
-public class BikeRentalController {
+@RequestMapping("/api/v1")           //  /api/v1/bike_rentals
+public class BikeRentalController {    // /api/v1/rating
 
     @Autowired
     BikeRentalServiceImpl bikeRentalService;

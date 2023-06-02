@@ -130,3 +130,47 @@ body {
   height: 300px;
   width: 500px;
 }
+
+
+.symbolsContainer {
+  float: left;
+  margin-left: 50px;
+}
+
+.legendCircle {
+  border-radius: 50%;
+  border: 1px solid #537898;
+  background: rgba(0, 128, 128, 0.5);
+  display: inline-block;
+}
+
+.info {
+  width: 20vw;
+  height: 49.5vh;
+  /* width:20vw; */
+  /* height:300px; */
+  padding: 6px 10px;
+  font: 14px/16px Arial, Helvetica, sans-serif;
+  background: rgba(0, 0, 0, 0.50);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  color: whitesmoke;
+  /* max-width:100%;
+  max-height:100%; */
+}
+
+.info h5 {
+  margin: 0 0 5px;
+  color: #777;
+  text-align: center;
+  /* margin-bottom: 15px; */
+  color: whitesmoke;
+  /* font-variant: small-caps; */
+  font-weight: bold;
+}
+
+.info #horBarChart {
+  width: 100% !important;
+  max-width: 800px;
+  /* height:inherit; */
+}

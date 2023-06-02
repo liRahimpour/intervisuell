@@ -10,15 +10,25 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.css"/>
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.Default.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.6.0/leaflet.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js"></script>
+
     <script src="https://unpkg.com/leaflet.markercluster@1.3.0/dist/leaflet.markercluster.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
     <!-- leaflet locate plugin -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.js" charset="utf-8"></script>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.79.0/dist/L.Control.Locate.min.js"
+            charset="utf-8"></script>
     <!--bootstrape css-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+    <!-- diagrammmmmm -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="/iv-portal/js/highcharts.js"></script>
+
 
     <!-- Leaflet Overpass Layer -->
     <link rel="stylesheet" href="./OverPassLayer.css"/>
@@ -34,6 +44,50 @@
     <!-- Custom styles for this template -->
     <link href="map.css" rel="stylesheet">
 
+    <style>
+        .symbolsContainer {
+            float: left;
+            margin-left: 50px;
+        }
+
+        .legendCircle {
+            border-radius: 50%;
+            border: 1px solid #537898;
+            background: rgba(0, 128, 128, 0.5);
+            display: inline-block;
+        }
+
+        .info {
+            width: 20vw;
+            height: 49.5vh;
+            /* width:20vw; */
+            /* height:300px; */
+            padding: 6px 10px;
+            font: 14px/16px Arial, Helvetica, sans-serif;
+            background: rgba(0, 0, 0, 0.50);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            color: whitesmoke;
+            /* max-width:100%;
+            max-height:100%; */
+        }
+
+        .info h5 {
+            margin: 0 0 5px;
+            color: #777;
+            text-align: center;
+            /* margin-bottom: 15px; */
+            color: whitesmoke;
+            /* font-variant: small-caps; */
+            font-weight: bold;
+        }
+
+        .info #horBarChart {
+            width: 100% !important;
+            max-width: 800px;
+            /* height:inherit; */
+        }
+    </style>
 
 </head>
 <body class="d-flex h-100 ">
@@ -41,7 +95,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <symbol id="bootstrap" width="16" height="16" fill="currentColor" viewBox="0 0 118 94">
         <title>Map</title>
-        <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.598-.49L10.5.99 5.598.01a.5.5 0 0 0-.196 0l-5 1A.5.5 0 0 0 0 1.5v14a.5.5 0 0 0 .598.49l4.902-.98 4.902.98a.502.502 0 0 0 .196 0l5-1A.5.5 0 0 0 16 14.5V.5zM5 14.09V1.11l.5-.1.5.1v12.98l-.402-.08a.498.498 0 0 0-.196 0L5 14.09zm5 .8V1.91l.402.08a.5.5 0 0 0 .196 0L11 1.91v12.98l-.5.1-.5-.1z"/>
+        <path fill-rule="evenodd"
+              d="M16 .5a.5.5 0 0 0-.598-.49L10.5.99 5.598.01a.5.5 0 0 0-.196 0l-5 1A.5.5 0 0 0 0 1.5v14a.5.5 0 0 0 .598.49l4.902-.98 4.902.98a.502.502 0 0 0 .196 0l5-1A.5.5 0 0 0 16 14.5V.5zM5 14.09V1.11l.5-.1.5.1v12.98l-.402-.08a.498.498 0 0 0-.196 0L5 14.09zm5 .8V1.91l.402.08a.5.5 0 0 0 .196 0L11 1.91v12.98l-.5.1-.5-.1z"/>
     </symbol>
     <symbol id="facebook" viewBox="0 0 16 16">
         <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
@@ -57,149 +112,22 @@
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column ">
     <header class="mb-auto  class= container-sm">
         <div>
-            <h3 class="float-md-start mb-xxl-5">DingsMap</h3>
+            <h3 class="float-md-start mb-xxl-5">EcoMaps</h3>
             <nav class="nav nav-masthead justify-content-center float-md-end">
                 <a class="nav-link fw-bold py-1 px-0 color" aria-current="page" href="index.html">Home</a>
                 <a class="nav-link fw-bold py-1 px-0 active" href="./map.html">Map</a>
-                <a class="nav-link fw-bold py-1 px-0" href="#">Contact</a>
+                <a class="nav-link fw-bold py-1 px-0 " href="#">API</a>
             </nav>
         </div>
     </header>
 
     <main class="px-3">
         <div id='map' class="container-md class= border border-2">
-            <script>
-                let map = L.map('map').setView([49.9929, 8.2473], 13);
-
-                //3 baselayer
-                const satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-                    attribution: 'Map data &copy; <a href="https://www.esri.com/">Esri</a>',
-                    transparent: true,
-                    minZoom: 0,
-                    maxZoom: 22
-                });
-
-                // Add OpenStreetMap as the first base layer
-                let detaillierteKarte = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
-                    transparent: true,
-                    layers: 'osm-mapnik',
-                    minZoom: 0,
-                    maxZoom: 20
-                });
-
-                const standard = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-                    attribution: 'Map tiles by Carto, under CC BY 3.0. Data by OpenStreetMap, under ODbL.',
-                    subdomains: 'abcd',
-                    minZoom: 0,
-                    maxZoom: 22
-                }).addTo(map);
-
-                //######################
-
-                // nicht fnktioniert
-                // eingene WMS
-                const fahrradverleih = L.tileLayer.wms('http://localhost:8084/geoserver/wms', {
-                    layers: 'mainz:fahrradverleih',
-                    format: 'image/png',
-                    minZoom: 1,
-                    maxZoom: 20,
-                    transparent: true,
-                    attribution: '... </a>'
-                });
-
-
-                //Fertig
-                //Overpass Layer ( - icon muss geändert werden - Clustering)
-                const ladestation = new L.OverPassLayer({
-                    'query': '(node({{bbox}})["amenity"="charging_station"];);out qt;', minZoom: 5
-                });
-
-
-                //TODO
-                // Fahradwege
-                const fahrradwege = L.tileLayer.wms('http://localhost:8084/geoserver/wms', {
-                    layers: 'mainz:Radwege',
-                    format: 'image/png',
-                    minZoom: 1,
-                    maxZoom: 20,
-                    transparent: true,
-                    attribution: '... </a>'
-                });
-
-
-                const supermarkt = L.tileLayer.wms('http://localhost:8084/geoserver/wms', {
-                    layers: 'mainz:Supermarkt',
-                    format: 'image/png',
-                    minZoom: 1,
-                    maxZoom: 20,
-                    transparent: true,
-                    attribution: '... </a>'
-                });
-
-                //TODO
-                const viertelayer = new L.marker;
-
-
-                // ##############################################
-
-                // Marker zur Karte hinzufügen
-                const myIcon = L.AwesomeMarkers.icon({
-                    icon: 'star',
-                    markerColor: 'red',
-                    prefix: 'fa'
-                });
-
-                const redMarker = L.AwesomeMarkers.icon({
-                    icon: 'coffee',
-                    iconColor: 'black',
-                    prefix: 'fa',
-                    markerColor: 'red'
-                });
-
-                // Create a layer control for switching between the base layers
-                let baseLayers = {
-                    'Satellit': satellite,
-                    'Karte': detaillierteKarte,
-                    'Standard': standard
-                };
-                // Create a layer control for switching between the layers
-                let Overlays = {
-                    'Fahrradausleihe': fahrradverleih,
-                    'Ladestation': ladestation,
-                    'Fahrradwege': fahrradwege,
-                    'supermärkte':supermarkt
-                };
-
-
-                L.control.layers(baseLayers, Overlays).addTo(map);
-                L.marker([49.9929, 8.2473], {icon: myIcon}).addTo(map);
-                L.marker([49.9940, 8.2590]).addTo(map);
-                L.marker([49.9929, 8.2373], {icon: redMarker}).addTo(map);
-
-                <!--location-->
-                L.control.locate(
-                    {
-
-                        returnToPrevBounds: true,
-                        flyTo: true,
-                        position: "bottomright",
-                        strings: {
-                            title: "Show me where I am, yo!"
-                        },
-                        showCompass: true,
-                        markerClass: L.marker,
-
-
-                    }
-
-                ).addTo(map);
-
-            </script>
+            <script src="js/map.js"></script>
+            <script src="js/highcharts.js"></script>
+            <script src="js/location.js"></script>
         </div>
     </main>
-
-
     <div class="container ">
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
             <div class="col-md-4 d-flex align-items-center">
@@ -208,7 +136,7 @@
                         <use xlink:href="#bootstrap"/>
                     </svg>
                 </a>
-                <span class="mb-3 mb-md-0 text-body-secondary">&copy; 2023 Company, Inc</span>
+                <span class="mb-3 mb-md-0 text-body-secondary">&copy; SoSe 2023 EcoMaps</span>
             </div>
 
             <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
@@ -222,19 +150,14 @@
                         <use xlink:href="#instagram"/>
                     </svg>
                 </a></li>
-                <li class="ms-3"><a class="text-body-secondary" href="#">
-                    <svg class="bi" width="24" height="24">
-                        <use xlink:href="#facebook"/>
-                    </svg>
+                <li class="ms-3"><a class="text-body-secondary" href="https://github.com/liRahimpour/intervisuell">
+                    <img src="https://cdn4.iconfinder.com/data/icons/iconsimple-logotypes/512/github-512.png" alt="GitHub" width="24" height="24">
                 </a></li>
             </ul>
         </footer>
     </div>
 
-
 </div>
-
 </body>
 </html>
-
 
