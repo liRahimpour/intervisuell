@@ -27,7 +27,7 @@
 
     <!-- diagrammmmmm -->
     <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="/iv-portal/js/highcharts.js"></script>
+    <script src="./js/myhighcharts.js"></script>
 
 
     <!-- Leaflet Overpass Layer -->
@@ -35,7 +35,6 @@
     <script src="./OverPassLayer.bundle.js"></script>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/footers/">
-    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css">
@@ -59,7 +58,7 @@
 
         .info {
             width: 20vw;
-            height: 49.5vh;
+            height: 49vh;
             /* width:20vw; */
             /* height:300px; */
             padding: 6px 10px;
@@ -124,7 +123,84 @@
     <main class="px-3">
         <div id='map' class="container-md class= border border-2">
             <script src="js/map.js"></script>
-            <script src="js/highcharts.js"></script>
+            <script>
+
+                function barChartLegend() {
+                    var info = L.control({position: 'topright'});
+                    info.onAdd = function (map) {
+                        var div = L.DomUtil.create('div', 'info');
+                        div.innerHTML += '<h5></h5>';
+                        div.innerHTML += '<div id="chartContainer"></div>';
+                        return div;
+                    };
+                    info.addTo(map);
+                }
+
+                barChartLegend();
+
+
+                // Erstelle das Highchart-Diagramm im Container
+                const chart = Highcharts.chart('chartContainer', {
+                    chart: {
+                        type: 'bar' // Wähle den Diagrammtyp (z.B. Säulendiagramm)
+                    },
+                    title: {
+                        text: 'Anzahl der Leihstationen'
+                    },
+                    xAxis: {
+                        categories: ['Leihstationen'],
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Anzahl'
+                        }
+                    },
+                    series: [{
+                        name: 'Leihstationen',
+                        data: [] // Leere Datenpunkte, werden später aktualisiert
+                    }]
+                });
+
+                fetch('http://localhost:8083/api/v1/bike_rentals')
+                    .then(response => response.json())
+                    .then(data => {
+                        // Speichere die Daten für spätere Verwendung
+                        window.data = data;
+                        // Aktualisiere das Diagramm
+                        updateChart();
+                        console.log(data.length)
+                    })
+                    .catch(error => {
+                        console.error('Fehler beim Abrufen der API-Daten:', error);
+                    });
+
+
+                function updateChart() {
+                    // Holen Sie die aktuellen sichtbaren Grenzen der Karte
+                    const bounds = map.getBounds();
+                    console.log('bounds: ' + bounds);
+                    var count = 0;
+                    // Filtere die Leihstationen, die innerhalb der sichtbaren Grenzen liegen
+                    data.filter(station => {
+                        const coordinates = station.geom.coordinates;
+                        const latLng = L.latLng(coordinates[1], coordinates[0]);
+                        console.log('langlat: ' + latLng);
+                        if (bounds.contains(latLng)) {
+                            count++;
+                        }
+                    });
+
+                    console.log('count: ' + count);
+                    // Aktualisiere das Diagramm mit den sichtbaren Leihstationen
+                    chart.series[0].update({
+                        data: [count]
+                    });
+                }
+
+                // Füge Leaflet-Kartenereignisse hinzu, um das Diagramm bei Kartenbewegungen/Zooms zu aktualisieren
+                map.on('moveend', updateChart);
+
+            </script>
             <script src="js/location.js"></script>
         </div>
     </main>
@@ -151,7 +227,8 @@
                     </svg>
                 </a></li>
                 <li class="ms-3"><a class="text-body-secondary" href="https://github.com/liRahimpour/intervisuell">
-                    <img src="https://cdn4.iconfinder.com/data/icons/iconsimple-logotypes/512/github-512.png" alt="GitHub" width="24" height="24">
+                    <img src="https://cdn4.iconfinder.com/data/icons/iconsimple-logotypes/512/github-512.png"
+                         alt="GitHub" width="24" height="24">
                 </a></li>
             </ul>
         </footer>

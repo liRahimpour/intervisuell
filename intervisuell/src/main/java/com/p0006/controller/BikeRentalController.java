@@ -11,8 +11,8 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/v1")           //  /api/v1/bike_rentals
-public class BikeRentalController {    // /api/v1/rating
+@RequestMapping("/api/v1")
+public class BikeRentalController {
 
     @Autowired
     BikeRentalServiceImpl bikeRentalService;
