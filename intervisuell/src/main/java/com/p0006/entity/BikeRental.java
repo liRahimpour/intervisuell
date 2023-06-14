@@ -29,7 +29,7 @@ public class BikeRental implements Serializable {
     private Point geom;
     private String amenity;
     @Column(name = "bicycle_re")
-    private  String bicycleRe;
+    private String bicycleRe;
     private String capacity;
     private String name;
     @Column(name = "opening_ho")

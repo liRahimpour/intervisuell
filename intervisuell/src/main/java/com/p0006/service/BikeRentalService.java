@@ -6,7 +6,8 @@ import java.util.List;
 
 public interface BikeRentalService {
 
-	List<BikeRental> findAll();
-	List<BikeRental> bikeRentalSearchAfterRating(float rating);
+    List<BikeRental> findAll();
+
+    List<BikeRental> bikeRentalSearchAfterRating(float rating);
 
 }

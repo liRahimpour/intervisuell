@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface BikeRentalRepository extends JpaRepository<BikeRental, Long> {
     List<BikeRental> findAll();
-    List<BikeRental> findBikeRentalsByRatingGreaterThanEqual(float rating);
 
+    List<BikeRental> findBikeRentalsByRatingGreaterThanEqual(float rating);
 
 }
