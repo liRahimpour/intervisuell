@@ -27,7 +27,6 @@
 
     <!-- diagrammmmmm -->
     <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="./js/myhighcharts.js"></script>
 
 
     <!-- Leaflet Overpass Layer -->
@@ -125,6 +124,27 @@
             <script src="js/map.js"></script>
             <script>
 
+                const ladestation_icon = L.icon({
+                    iconUrl: 'icon/battery-charging.svg',
+
+                    iconSize: [38, 95], // size of the icon
+                    shadowSize: [50, 64], // size of the shadow
+                    iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+                    shadowAnchor: [4, 62],  // the same for the shadow
+                    popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+                });
+
+                const bike_icon = L.icon({
+                    iconUrl: 'icon/bicycle.svg',
+
+                    iconSize: [38, 95], // size of the icon
+                    shadowSize: [50, 64], // size of the shadow
+                    iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+                    shadowAnchor: [4, 62],  // the same for the shadow
+                    popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+                });
+
+
                 function barChartLegend() {
                     var info = L.control({position: 'topright'});
                     info.onAdd = function (map) {
@@ -142,13 +162,13 @@
                 // Erstelle das Highchart-Diagramm im Container
                 const chart = Highcharts.chart('chartContainer', {
                     chart: {
-                        type: 'bar' // Wähle den Diagrammtyp (z.B. Säulendiagramm)
+                        type: 'column' // Wähle den Diagrammtyp (z.B. Säulendiagramm)
                     },
                     title: {
-                        text: 'Anzahl der Leihstationen'
+                        text: 'Leih- und Ladestationen in der nähe'
                     },
                     xAxis: {
-                        categories: ['Leihstationen'],
+                        categories: ['Stationen'],
                     },
                     yAxis: {
                         title: {
@@ -158,47 +178,99 @@
                     series: [{
                         name: 'Leihstationen',
                         data: [] // Leere Datenpunkte, werden später aktualisiert
-                    }]
+                    },
+                        {
+                            name: 'Ladestationen',
+                            data: [] // Leere Datenpunkte, werden später aktualisiert
+                        }]
                 });
+
+
 
                 fetch('http://localhost:8083/api/v1/bike_rentals')
                     .then(response => response.json())
-                    .then(data => {
+                    .then(dataBike_rentals => {
                         // Speichere die Daten für spätere Verwendung
-                        window.data = data;
+                        window.dataBike_rentals = dataBike_rentals;
                         // Aktualisiere das Diagramm
-                        updateChart();
-                        console.log(data.length)
+                        updateChartBike(bike_icon);
+                        console.log(dataBike_rentals.length)
+                    })
+                    .catch(error => {
+                        console.error('Fehler beim Abrufen der API-Daten:', error);
+                    });
+
+                fetch('http://localhost:8083/api/v1/charging_stations')
+                    .then(response => response.json())
+                    .then(dataCharging_stations => {
+                        // Speichere die Daten für spätere Verwendung
+                        window.dataCharging_stations = dataCharging_stations;
+                        // Aktualisiere das Diagramm
+                        updateChartLadestationen(ladestation_icon);
+                        console.log(dataCharging_stations.length)
                     })
                     .catch(error => {
                         console.error('Fehler beim Abrufen der API-Daten:', error);
                     });
 
 
-                function updateChart() {
+                function updateChartBike(icon) {
                     // Holen Sie die aktuellen sichtbaren Grenzen der Karte
                     const bounds = map.getBounds();
                     console.log('bounds: ' + bounds);
                     var count = 0;
                     // Filtere die Leihstationen, die innerhalb der sichtbaren Grenzen liegen
-                    data.filter(station => {
+                    dataBike_rentals.filter(station => {
                         const coordinates = station.geom.coordinates;
                         const latLng = L.latLng(coordinates[1], coordinates[0]);
                         console.log('langlat: ' + latLng);
                         if (bounds.contains(latLng)) {
                             count++;
+                            setMarker(coordinates, icon)
                         }
                     });
 
                     console.log('count: ' + count);
-                    // Aktualisiere das Diagramm mit den sichtbaren Leihstationen
+                    // Aktualisieren das Diagramm mit den sichtbaren Leihstationen
                     chart.series[0].update({
                         data: [count]
                     });
                 }
 
+                function updateChartLadestationen(icon) {
+                    // Holen Sie die aktuellen sichtbaren Grenzen der Karte
+                    const bounds = map.getBounds();
+                    console.log('bounds: ' + bounds);
+                    var count = 0;
+                    // Filtere die Leihstationen, die innerhalb der sichtbaren Grenzen liegen
+                    dataCharging_stations.filter(station => {
+                        const coordinates = station.geom.coordinates;
+                        const latLng = L.latLng(coordinates[1], coordinates[0]);
+                        console.log('langlat: ' + latLng);
+                        if (bounds.contains(latLng)) {
+                            count++;
+                            setMarker(coordinates, icon)
+                        }
+                    });
+
+                    console.log('count: ' + count);
+                    // Aktualisieren das Diagramm mit den sichtbaren Leihstationen
+                    chart.series[1].update({
+                        data: [count]
+                    });
+                }
+
+
+                function setMarker(coordinates, icon) {
+                    var marker = L.marker([coordinates[1], coordinates[0]], {icon: icon});
+                    marker.addTo(map);
+                }
+
                 // Füge Leaflet-Kartenereignisse hinzu, um das Diagramm bei Kartenbewegungen/Zooms zu aktualisieren
-                map.on('moveend', updateChart);
+                map.on('moveend', function () {
+                    updateChartLadestationen(ladestation_icon);
+                    updateChartBike(bike_icon);
+                });
 
             </script>
             <script src="js/location.js"></script>

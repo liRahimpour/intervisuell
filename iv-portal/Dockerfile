@@ -8,3 +8,5 @@ COPY OverPassLayer.bundle.js /usr/share/nginx/html
 COPY OverPassLayer.css /usr/share/nginx/html
 RUN mkdir /usr/share/nginx/html/js
 COPY /js /usr/share/nginx/html/js
+RUN mkdir /usr/share/nginx/html/icon
+COPY /icon /usr/share/nginx/html/icon

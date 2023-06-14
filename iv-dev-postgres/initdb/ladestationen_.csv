@@ -1,0 +1,68 @@
+id;amenity;capacity;the_geom;membership_card;name;operator;paypal
+1;charging_station;10;POINT (8.2341633 49.9658393);no;Stromtankstelle;Stadtwerke_Mainz-Daimler;no
+2;charging_station;;POINT (8.2544201 49.9480417);;Stromtankstelle (Parkplatz Möbel Martin);Möbel Martin;yes
+3;charging_station;2;POINT (8.28167 49.9724913);ChargeNow;;ChargeNow;no
+4;charging_station;2;POINT (8.2820265 49.9725911);ChargeNow;;;no
+5;charging_station;2;POINT (8.2770257 49.9996772);yes;;Mainzer Stadtwerke / innogy;
+6;charging_station;2;POINT (8.2765661 49.9963527);yes;;Mainzer Stadtwerke / innogy;
+7;charging_station;2;POINT (8.2658793 50.0029093);;;Mainzer Stadtwerke;
+8;charging_station;2;POINT (8.2288589 49.9686162);;;Allego;
+9;charging_station;2;POINT (8.27639 49.998866);yes;;Mainzer Stadtwerke / innogy;
+10;charging_station;2;POINT (8.2500554 50.0016686);yes;;UrStromMobil;no
+11;charging_station;2;POINT (8.2612146 50.0028675);;;Mainzer Stadtwerke;
+12;charging_station;2;POINT (8.2638989 50.0063556);;;Mainzer Stadtwerke;
+13;charging_station;2;POINT (8.2469861 49.9995961);;;Mainzer Stadtwerke;
+14;charging_station;2;POINT (8.280421 49.9599838);;;Mainzer Stadtwerke;
+15;charging_station;2;POINT (8.2524064 50.0096216);yes;;Mainzer Stadtwerke;
+16;charging_station;2;POINT (8.2552805 50.0117912);yes;;Mainzer Stadtwerke;
+17;charging_station;2;POINT (8.2630242 50.0100078);yes;;Mainzer Stadtwerke;
+18;charging_station;2;POINT (8.2897026 49.9857663);;;Mainzer Stadtwerke;
+19;charging_station;2;POINT (8.270384 50.0031003);;;Mainzer Stadtwerke;
+20;charging_station;2;POINT (8.3139045 49.9626254);;;Mainzer Stadtwerke;
+21;charging_station;2;POINT (8.2436161 50.0038745);yes;;UrStromMobil;no
+22;charging_station;2;POINT (8.2687254 49.9987757);;;Mainzer Stadtwerke;
+23;charging_station;2;POINT (8.2595788 50.0057922);;;Mainzer Stadtwerke;
+24;charging_station;2;POINT (8.2692627 50.0048203);;;;
+25;charging_station;1;POINT (8.2527434 50.0105506);yes;;UrStromMobil;
+26;charging_station;2;POINT (8.2384922 49.9669185);;;Pfalzwerke AG;
+27;charging_station;2;POINT (8.2538473 50.0167754);;;Mainzer Stadtwerke;
+28;charging_station;2;POINT (8.2542718 50.0165572);;;Mainzer Stadtwerke;
+29;charging_station;;POINT (8.1761153 49.9861354);;ChargePoint;;
+30;charging_station;2;POINT (8.2645411 49.9862142);;;Mainzer Stadtwerke;
+31;charging_station;1;POINT (8.2632395 50.0105849);yes;;Mainzer Stadtwerke;
+32;charging_station;2;POINT (8.2631951 50.0105543);yes;;Mainzer Stadtwerke;
+33;charging_station;2;POINT (8.263145 50.0105201);yes;;Mainzer Stadtwerke;
+34;charging_station;2;POINT (8.2636647 50.0106769);yes;;Mainzer Stadtwerke;
+35;charging_station;2;POINT (8.2636159 50.0106399);yes;;Mainzer Stadtwerke;
+36;charging_station;1;POINT (8.2635713 50.0105999);yes;;Mainzer Stadtwerke;
+37;charging_station;2;POINT (8.2634914 50.0107658);yes;;Mainzer Stadtwerke;
+38;charging_station;2;POINT (8.2634414 50.0107318);yes;;Mainzer Stadtwerke;
+39;charging_station;1;POINT (8.2635366 50.0107987);yes;;Mainzer Stadtwerke;
+40;charging_station;1;POINT (8.2633949 50.0106982);yes;;Mainzer Stadtwerke;
+41;charging_station;2;POINT (8.2633162 50.0106366);yes;;Mainzer Stadtwerke;
+42;charging_station;5;POINT (8.2632659 50.0106026);;;Mainzer Stadtwerke;designated
+43;charging_station;2;POINT (8.2683476 50.0062581);;;;
+44;charging_station;2;POINT (8.2634059 50.0104944);yes;;Mainzer Stadtwerke;
+45;charging_station;2;POINT (8.2569617 50.005598);yes;;Mainzer Stadtwerke;
+46;charging_station;1;POINT (8.258835 49.9992131);yes;;Mainzer Stadtwerke;
+47;charging_station;1;POINT (8.2588504 49.9991743);yes;;Mainzer Stadtwerke;
+48;charging_station;2;POINT (8.260404 50.0043035);yes;;Mainzer Stadtwerke;
+49;charging_station;2;POINT (8.2586551 50.0079131);;;;
+50;charging_station;2;POINT (8.2606308 50.0107104);;;Mainzer Stadtwerke;
+51;charging_station;;POINT (8.2133443 50.0033915);;;;
+52;charging_station;2;POINT (8.2799704 49.993625);;;Mainzer Stadtwerke;
+53;charging_station;4;POINT (8.2695288 49.9806099);;;Shell;
+54;charging_station;2;POINT (8.2705569 49.9772258);;;EnBW Energie Baden-Württemberg AG;
+55;charging_station;2;POINT (8.270567 49.9771731);;;EnBW Energie Baden-Württemberg AG;
+56;charging_station;2;POINT (8.2705831 49.9770761);;;EnBW Energie Baden-Württemberg AG;
+57;charging_station;2;POINT (8.2705938 49.9770175);;;EnBW Energie Baden-Württemberg AG;
+58;charging_station;2;POINT (8.250076 49.9772573);;;ladenetz.de;
+59;charging_station;3;POINT (8.2099729 50.0028657);;;EWR;yes
+60;charging_station;2;POINT (8.2354872 50.0221653);;;;
+61;charging_station;8;POINT (8.223353 50.0270907);;;;
+62;charging_station;2;POINT (8.2883574 49.9734928);;;EnBW;
+63;charging_station;2;POINT (8.2883869 49.9735337);;;EnBW;
+64;charging_station;2;POINT (8.2884191 49.9735738);;;EnBW;
+65;charging_station;2;POINT (8.2884486 49.9736148);;;EnBW;
+66;charging_station;2;POINT (8.2841629 49.978435);;;Mainzer Stadtwerke;
+67;charging_station;2;POINT (8.2627378 49.964087);;;;

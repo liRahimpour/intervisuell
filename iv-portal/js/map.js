@@ -1,5 +1,12 @@
 let map = L.map('map').setView([49.9929, 8.2750], 13);
 
+// Marker zur Karte hinzufügen
+const myIcon = L.AwesomeMarkers.icon({
+    icon: 'spinner',
+    markerColor: 'red',
+    prefix: 'fa'
+});
+
 
 //3 baselayer
 const satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
@@ -28,11 +35,11 @@ const standard = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voya
 var osm_humanitarian = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
-;
+
 
 //######################
 
-// nicht fnktioniert
+
 // eingene WMS
 const fahrradverleih = L.tileLayer.wms('http://localhost:8084/geoserver/wms', {
     layers: 'mainz:fahrradverleih',
@@ -40,19 +47,17 @@ const fahrradverleih = L.tileLayer.wms('http://localhost:8084/geoserver/wms', {
     minZoom: 1,
     maxZoom: 20,
     transparent: true,
+    icon: myIcon,
     attribution: '... </a>'
-});
+}).addTo(map);
 
 
-//Fertig
-//Overpass Layer ( - icon muss geändert werden - Clustering)
+
 const ladestation = new L.OverPassLayer({
     'query': '(node({{bbox}})["amenity"="charging_station"];);out qt;', minZoom: 5
-});
+}).addTo(map);
 
 
-//TODO
-// Fahradwege
 const fahrradwege = L.tileLayer.wms('http://localhost:8084/geoserver/wms', {
     layers: 'mainz:Radwege',
     format: 'image/png',
@@ -61,7 +66,6 @@ const fahrradwege = L.tileLayer.wms('http://localhost:8084/geoserver/wms', {
     transparent: true,
     attribution: '... </a>'
 });
-
 
 const supermarkt = L.tileLayer.wms('http://localhost:8084/geoserver/wms', {
     layers: 'mainz:Supermarkt',
@@ -73,25 +77,11 @@ const supermarkt = L.tileLayer.wms('http://localhost:8084/geoserver/wms', {
 });
 
 
-//TODO
-const viertelayer = new L.marker;
-
 
 // ##############################################
 
-// Marker zur Karte hinzufügen
-const myIcon = L.AwesomeMarkers.icon({
-    icon: 'star',
-    markerColor: 'red',
-    prefix: 'fa'
-});
 
-const redMarker = L.AwesomeMarkers.icon({
-    icon: 'coffee',
-    iconColor: 'black',
-    prefix: 'fa',
-    markerColor: 'red'
-});
+
 
 // Create a layer control for switching between the base layers
 let baseLayers = {
@@ -110,8 +100,3 @@ let Overlays = {
 
 
 L.control.layers(baseLayers, Overlays).setPosition('topleft').addTo(map);
-L.marker([49.9929, 8.2473], {icon: myIcon}).addTo(map);
-L.marker([49.9940, 8.2590]).addTo(map);
-L.marker([49.9929, 8.2373], {icon: redMarker}).addTo(map);
-
-

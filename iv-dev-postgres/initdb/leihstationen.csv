@@ -1,0 +1,52 @@
+id;amenity;bicycle_re;capacity;the_geom;name;opening_ho;operator;rating;website
+1;bicycle_rental;docking_station;24;POINT (8.263447716821233 50.000414796);HBF / Bonifaziusstrase;24/7;Mainzer Verkehrsgesellschaft;1;https://www.mainzer-mobilitaet.de/mehr-mobilitaet/meinrad
+2;bicycle_rental;docking_station;12;POINT (8.2491535 50.0126921);Bismarckplatz;NULL;Mainzer Verkehrsgesellschaft;2;http://www.mvg-mainz.de
+3;bicycle_rental;docking_station;12;POINT (8.2609697 50.0022705);Stadthaus;24/7;Mainzer Verkehrsgesellschaft;3;https://www.mainzer-mobilitaet.de/mehr-mobilitaet/meinrad
+4;bicycle_rental;NULL;NULL;POINT (8.2764334 50.000502);Rathaus;24/7;Mainzer Verkehrsgesellschaft;4;NULL
+5;bicycle_rental;docking_station;12;POINT (8.2548084 50.0082311);Synagoge;NULL;MVG;5;http://www.mvg-mainz.de/mainzigartig-mobil/mit-mvgmeinrad/einfuehrung.html
+6;bicycle_rental;NULL;12;POINT (8.2548084 50.0114003);Goetheplatz;NULL;Mainzer Verkehrsgesellschaft;1;http://www.mvg-mainz.de
+7;bicycle_rental;NULL;24;POINT (8.2512389 50.0146991);MVG;NULL;Mainzer Verkehrsgesellschaft;5;NULL
+8;bicycle_rental;docking_station;17;POINT (8.2637376 50.0107164);Mainzer Stadtwerke AG;NULL;Mainzer Verkehrsgesellschaft;3;http://www.mvg-mainz.de/mainzigartig-mobil/mit-mvgmeinrad/einfuehrung.html
+9;bicycle_rental;docking_station;18;POINT (8.2659941 50.012412 );MVGmeinRad: Am Zollhafen;NULL;Mainzer Verkehrsgesellschaft;2;http://www.mvgmeinrad.de
+10;bicycle_rental;docking_station;12;POINT (8.2791658 49.9941292);Neutorstrae;24/7;Mainzer Verkehrsgesellschaft;3.2;https://www.mainzer-mobilitaet.de/mehr-mobilitaet/meinrad
+11;bicycle_rental;dropoff_point;10;POINT (8.2729487 49.9933791);Zitadelle;24/7;Mainzer Verkehrsgesellschaft;5;https://www.mainzer-mobilitaet.de/mehr-mobilitaet/meinrad
+12;bicycle_rental;docking_station;12;POINT (8.265857 49.9943223);Bastion Martin;24/7;Mainzer Verkehrsgesellschaft;4.8;https://www.mainzer-mobilitaet.de/mehr-mobilitaet/meinrad
+13;bicycle_rental;docking_station;30;POINT (8.2717096 49.9996708);Hoefchen;24/7;Mainzer Verkehrsgesellschaft;4.7;https://www.mainzer-mobilitaet.de/mehr-mobilitaet/meinrad
+14;bicycle_rental;docking_station;6;POINT (8.268684 50.0005121);Kronberger Hof;24/7;Mainzer Verkehrsgesellschaft;4.6;https://www.mainzer-mobilitaet.de/mehr-mobilitaet/meinrad
+15;bicycle_rental;NULL;12;POINT (8.2671444 49.9995811);Grosse Langgasse;24/7;MVG;4.5;NULL
+16;bicycle_rental;docking_station;24;POINT (8.2594802 50.0058479);Gartenfeldplatz;24/7;Mainzer Verkehrsgesellschaft;4.4;NULL
+17;bicycle_rental;docking_station;12;POINT (8.2443406 50.0056004);Berufsschulzentrum;24/7;MVG;4.3;NULL
+18;bicycle_rental;docking_station;8;POINT (8.2304925 49.996457);Muenchfeld;24/7;MVG;4.2;NULL
+19;bicycle_rental;docking_station;12;POINT (8.2370792 49.980418);Ludwig-Nauth-StraÃe;24/7;Mainzer Verkehrsgesellschaft;4.1;https://www.mainzer-mobilitaet.de/mehr-mobilitaet/meinrad
+20;bicycle_rental;dropoff_point;4;POINT (8.2693685 49.9763015);Kurmainz-Kaserne;24/7;Mainzer Verkehrsgesellschaft;3.9;https://www.mainzer-mobilitaet.de/mehr-mobilitaet/meinrad
+21;bicycle_rental;dropoff_point;6;POINT (8.2800909 49.9635336);Am Schinnergraben;24/7;Mainzer Verkehrsgesellschaft;4.8;https://www.mainzer-mobilitaet.de/mehr-mobilitaet/meinrad
+22;bicycle_rental;docking_station;24;POINT (8.2585676 50.0004642);Hauptbahnhof West;24/7;Mainzer Verkehrsgesellschaft;4.4;https://www.mainzer-mobilitaet.de/mehr-mobilitaet/meinrad
+23;bicycle_rental;docking_station;18;POINT (8.268014 50.001723);RÃ¶merpassage;24/7;Mainzer Verkehrsgesellschaft;3.1;https://www.mainzer-mobilitaet.de/mehr-mobilitaet/meinrad
+24;bicycle_rental;docking_station;NULL;POINT (8.2687517 50.0051522 );Ernst-Ludwig-Platz;24/7;MVG;3.8;NULL
+25;bicycle_rental;docking_station;18;POINT (8.2412392 49.9927966);Uni / Muschel;24/7;MVG;3.7;NULL
+26;bicycle_rental;NULL;18;POINT (8.2010843 50.004789 );Volkspark;24/7;Mainzer Verkehrsgesellschaft;3.6;https://www.mainzer-mobilitaet.de/mehr-mobilitaet/meinrad
+27;bicycle_rental;docking_station;8;POINT (8.2898914 49.9857701);CafÃ© Raab / Am Gonsenheimer Wald;24/7;Mainzer Verkehrsgesellschaft;3.5;NULL
+28;bicycle_rental;docking_station;12;POINT (8.2162009 50.0060238);CanisiusstraÃe;24/7;MVG;3.4;NULL
+29;bicycle_rental;NULL;12;POINT (8.234825 50.0091211);GonsbachgÃ¤rten;24/7;MVG;3.3;NULL
+30;bicycle_rental;docking_station;18;POINT (8.2372714 49.9943601);Uni / Wittichweg;24/7;Mainzer Verkehrsgesellschaft;3.2;NULL
+31;bicycle_rental;docking_station;24;POINT (8.2603397 50.0019844);HBF / SchottstraÃe 1;24/7;MVG;3.1;NULL
+32;bicycle_rental;docking_station;24;POINT (8.2604136 50.0019163);HBF / SchottstraÃe 2;24/7;MVG;4.8;NULL
+33;bicycle_rental;docking_station;12;POINT (8.267065 50.002669);GroÃe Bleiche;24/7;Mainzer Verkehrsgesellschaft;4.7;https://www.mainzer-mobilitaet.de/mehr-mobilitaet/meinrad
+34;bicycle_rental;dropoff_point;11;POINT (8.2855253 49.9717757);Am GroÃberg;24/7;Mainzer Verkehrsgesellschaft;4.6;https://www.mainzer-mobilitaet.de/mehr-mobilitaet/meinrad
+35;bicycle_rental;docking_station;12;POINT (8.2455804 49.9818444);BahnstraÃe;24/7;Mainzer Verkehrsgesellschaft;4.5;https://www.mainzer-mobilitaet.de/mehr-mobilitaet/meinrad
+36;bicycle_rental;docking_station;18;POINT (8.2046315 50.0011141);Juxplatz;24/7;MVG;4.4;NULL
+37;bicycle_rental;docking_station;12;POINT (8.2561065 50.0123647);SÃ¶mmerringstraÃe;NULL;Mainzer Verkehrsgesellschaft;4.3;http://www.mvg-mainz.de
+38;bicycle_rental;docking_station;6;POINT (8.2596916 50.01122);MVGmeinRad: NeckarstraÃe;NULL;Mainzer Verkehrsgesellschaft;4.2;http://www.mvg-mainz.de/mainzigartig-mobil/mit-mvgmeinrad/einfuehrung.html
+39;bicycle_rental;docking_station;12;POINT (8.2765838 49.9946967);Bahnhof RÃ¶misches Theater 2;24/7;Mainzer Verkehrsgesellschaft;4.1;https://www.mainzer-mobilitaet.de/mehr-mobilitaet/meinrad
+40;bicycle_rental;docking_station;12;POINT (8.2765838 49.9930482);Stadtpark;24/7;Mainzer Verkehrsgesellschaft;4.2;NULL
+41;bicycle_rental;dropoff_point;18;POINT (8.2359932 49.9703674);Wilhelm-Quetsch-StraÃe;24/7;Mainzer Verkehrsgesellschaft;4.4;https://www.mainzer-mobilitaet.de/mehr-mobilitaet/meinrad
+42;bicycle_rental;docking_station;18;POINT (8.2631588 50.0077406);Frauenlobplatz;24/7;Mainzer Verkehrsgesellschaft;3.4;https://www.mainzer-mobilitaet.de/mehr-mobilitaet/meinrad
+43;bicycle_rental;docking_station;24;POINT (8.2283306 49.9878175);Hochschule Mainz;24/7;Mainzer Verkehrsgesellschaft;3.1;https://www.mainzer-mobilitaet.de/mehr-mobilitaet/meinrad
+44;bicycle_rental;docking_station;11;POINT (8.2795586 49.9824268);Martin-Luther-StraÃe;24/7;Mainzer Verkehrsgesellschaft;4.7;https://www.mainzer-mobilitaet.de/mehr-mobilitaet/meinrad
+45;bicycle_rental;docking_station;9;POINT (8.2964082 49.9757506);Laubenheimer StraÃe;24/7;Mainzer Verkehrsgesellschaft;1.8;https://www.mainzer-mobilitaet.de/mehr-mobilitaet/meinrad
+46;bicycle_rental;NULL;12;POINT (8.2949995 49.9863648);Jugendherberge;24/7;Mainzer Verkehrsgesellschaft;1.3;https://www.mainzer-mobilitaet.de/mehr-mobilitaet/meinrad
+47;bicycle_rental;NULL;12;POINT (8.2896134 49.9899839);Favorite-Parkhotel;24/7;Mainzer Verkehrsgesellschaft;4.9;https://www.mainzer-mobilitaet.de/mehr-mobilitaet/meinrad
+48;bicycle_rental;docking_station;18;POINT (8.2393827 50.0059194);Ludwigsburger StraÃe;24/7;MVG;3.8;NULL
+49;bicycle_rental;NULL;15;POINT (8.2081891 50.0073668);Am Sportfeld;24/7;MVG;2.7;NULL
+50;bicycle_rental;docking_station;12;POINT (8.2132654 50.0034615);MVGmeinRad - Wilhelm-Raabe-StraÃe;24/7;Mainzer Verkehrsgesellschaft;3.5;NULL
+51;bicycle_rental;docking_station;12;POINT (8.259365 49.9932405);Universitätsmedizin Haupteingang;24/7;Mainzer Verkehrsgesellschaft;3.5;NULL
