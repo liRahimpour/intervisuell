@@ -69,7 +69,7 @@ const supermarkt = L.tileLayer.wms('http://localhost:8084/geoserver/wms', {
   attribution: '... </a>'
 });
   ```
-- Zugriff über: http://localhost:8084/
+- Zugriff über: http://localhost:8084/geoserver/web/
 
 ### pgAdmin
 
