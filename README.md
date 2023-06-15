@@ -93,9 +93,6 @@ Das Portal ist ein Nginx-Webserver, der die HTML-, CSS- und JavaScript-Dateien f
 
 Das Projekt wurde im Rahmen des Fachs "Interaktive Visualisierung und Internet" an der Hochschule Mainz entwickelt.
 
-#
-
-
 
 
 
