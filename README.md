@@ -4,13 +4,7 @@ Eine interaktive Karte für umweltbewusste Fahrradfahrer*innen, die ein Elektroa
 
 Die Karte zeigt Ihnen die besten Orte zum Parken und Aufladen Ihres Elektrofahrzeugs, während Sie mit dem Fahrrad durch die Stadt fahren. Sie können auch auf die Karte sehen, wo Sie in der Nähe ein Fahrrad ausleihen können. Außerdem können Sie nach Radwegen suchen, die speziell für Elektrofahrräder geeignet sind, um Ihre Fahrt so angenehm und effizient wie möglich zu gestalten.
 
-## Komponenten
-
-- Backend: [Dokumentation](./backend/README.md)
-- PostgreSQL: [Dokumentation](./postgres/README.md)
-- Geoserver: [Dokumentation](./geoserver/README.md)
-- pgAdmin: [Dokumentation](./pgadmin/README.md)
-- Portal: [Dokumentation](./portal/README.md)
+Das Projekt umfasst die Entwicklung einer interaktiven Visualisierungslösung, die verschiedene Komponenten umfasst. Diese Komponenten arbeiten zusammen, um Daten aus einer PostGIS-Datenbank abzurufen und über eine webbasierte Benutzeroberfläche darzustellen.
 
 ## Installation
 
@@ -21,64 +15,75 @@ Folgende Schritte sind erforderlich, um das Projekt lokal auszuführen:
 3. Gehe in das Projektverzeichnis: `cd intervisuell/iv-dev-dockercompose`
 4. Führe das BashScript `build.sh` aus
 
-Weitere Informationen zur Installation und Konfiguration findest du in den entsprechenden Komponentendokumentationen.
 
 ## Komponentendokumentation
 ![Beschreibung des Bildes](iv-doc/arc.png)
 ### Backend
 
-Beschreibung und Anleitung zur Verwendung des Backend-Moduls.
+Das Backend wurde mit Java Spring Boot, Hibernate und Maven entwickelt. Es stellt zwei Endpunkte bereit, die Daten aus der PostGIS-Datenbank abrufen und als JSON an das Frontend weitergeben. Die Endpunkte sind wie folgt erreichbar:
 
-- [Dokumentation](./backend/README.md)
 - Endpoints:
   - http://localhost:8083/api/v1/bike_rentals
   - http://localhost:8083/api/v1/charging_stations
 
 ### PostgreSQL
 
-Beschreibung und Anleitung zur Verwendung der PostgreSQL-Datenbank.
-
-- [Dokumentation](./postgres/README.md)
+Die Datenbank basiert auf PostgreSQL und verwendet die PostGIS-Erweiterung. Sie enthält zwei Tabellen: "Bike_rental" und "Charging_station". Die Datenbank ist über den Port 5432 erreichbar.
 - Host: localhost
-- Port: 5432
-
+- POSTGRES_USER=`admin`
+- POSTGRES_PASSWORD=`admin`
+- POSTGRES_DB=`db`
+- Port: `5432`
+- 
 ### Geoserver
 
-Beschreibung und Anleitung zur Verwendung des Geoservers.
+Der Geoserver beinhaltet drei Overlays, die in der Visualisierung verwendet werden. Er ist über den Port 8084 erreichbar.
+- Overlay:
+```
+const fahrradverleih = L.tileLayer.wms('http://localhost:8084/geoserver/wms', {
+  layers: 'mainz:fahrradverleih',
+  format: 'image/png',
+  minZoom: 1,
+  maxZoom: 20,
+  transparent: true,
+  icon: myIcon,
+  attribution: '... </a>'
+});
 
-- [Dokumentation](./geoserver/README.md)
-- Overlay-URLs:
-  - http://localhost:8084/overlay1
-  - http://localhost:8084/overlay2
-  - http://localhost:8084/overlay3
+const fahrradwege = L.tileLayer.wms('http://localhost:8084/geoserver/wms', {
+  layers: 'mainz:Radwege',
+  format: 'image/png',
+  minZoom: 1,
+  maxZoom: 20,
+  transparent: true,
+  attribution: '... </a>'
+}).addTo(map);
+
+const supermarkt = L.tileLayer.wms('http://localhost:8084/geoserver/wms', {
+  layers: 'mainz:Supermarkt',
+  format: 'image/png',
+  minZoom: 1,
+  maxZoom: 20,
+  transparent: true,
+  attribution: '... </a>'
+});
+  ```
 
 ### pgAdmin
 
-Beschreibung und Anleitung zur Verwendung von pgAdmin.
-
-- [Dokumentation](./pgadmin/README.md)
+Das Datenbankmanagementsystem pgAdmin wird verwendet, um die PostgreSQL-Datenbank zu initialisieren und zu verwalten. Es kann über den Port 8082 erreicht werden.
 - Zugriff über: http://localhost:8082
+- Username: `admin@admin.com`
+- Password: `admin`
 
 ### Portal
 
-Beschreibung und Anleitung zur Verwendung des Portals.
-
-- [Dokumentation](./portal/README.md)
-- Host: localhost
-- Port: 8081
-
-## API-Dokumentation
-
-- [API-Dokumentation des Backends](./backend/API.md)
-
-## Contributing
-
-Informationen zum Beitragenden und zum Einreichen von Pull Requests findest du in der [Contributing-Anleitung](./CONTRIBUTING.md).
+Das Portal ist ein Nginx-Webserver, der die HTML-, CSS- und JavaScript-Dateien für die Benutzeroberfläche enthält. Es ist über den Port 8081 erreichbar.
+- Zugriff über: http://localhost:8081
 
 ## Lizenz
 
-Dieses Projekt ist unter der [Lizenz](./LICENSE) lizenziert.
-
+Das Projekt wurde im Rahmen des Fachs "Interaktive Visualisierung und Internet" an der Hochschule Mainz entwickelt.
 
 
 
