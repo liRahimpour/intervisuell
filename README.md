@@ -6,6 +6,7 @@ Die Karte zeigt Ihnen die besten Orte zum Parken und Aufladen Ihres Elektrofahrz
 
 Das Projekt umfasst die Entwicklung einer interaktiven Visualisierungslösung, die verschiedene Komponenten umfasst. Diese Komponenten arbeiten zusammen, um Daten aus einer PostGIS-Datenbank, Geoserver und weitere Quellen abzurufen und über eine webbasierte Benutzeroberfläche darzustellen.
 
+![Technologie-Stack](iv-doc/techno.png)
 ## Installation
 
 Folgende Schritte sind erforderlich, um das Projekt lokal auszuführen:
@@ -17,7 +18,7 @@ Folgende Schritte sind erforderlich, um das Projekt lokal auszuführen:
 
 
 ## Komponentendokumentation
-![Beschreibung des Bildes](iv-doc/arc.png)
+![Architecture](iv-doc/arc.png)
 ### Backend
 
 Das Backend wurde mit Java Spring Boot, Hibernate und Maven entwickelt. Es stellt zwei Endpunkte bereit, die Daten aus der PostGIS-Datenbank abrufen und als JSON an das Frontend weitergeben. Die Endpunkte sind wie folgt erreichbar:
