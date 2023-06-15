@@ -28,6 +28,15 @@
     <!-- diagrammmmmm -->
     <script src="https://code.highcharts.com/highcharts.js"></script>
 
+    <!--Cluster-->
+    <!-- Leaflet.markercluster CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.1/MarkerCluster.css"/>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.1/MarkerCluster.Default.css"/>
+
+    <!-- Leaflet.markercluster JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.1/leaflet.markercluster.js"></script>
+
 
     <!-- Leaflet Overpass Layer -->
     <link rel="stylesheet" href="./OverPassLayer.css"/>
@@ -124,6 +133,8 @@
             <script src="js/map.js"></script>
             <script>
 
+                var markerClusterGroupBike = L.markerClusterGroup();
+                var markerClusterGroupCharging = L.markerClusterGroup();
                 const ladestation_icon = L.icon({
                     iconUrl: 'icon/battery-charging.svg',
 
@@ -186,7 +197,6 @@
                 });
 
 
-
                 fetch('http://localhost:8083/api/v1/bike_rentals')
                     .then(response => response.json())
                     .then(dataBike_rentals => {
@@ -213,20 +223,31 @@
                         console.error('Fehler beim Abrufen der API-Daten:', error);
                     });
 
+                markerClusterGroupBike.addTo(map);
+                markerClusterGroupCharging.addTo(map);
 
                 function updateChartBike(icon) {
                     // Holen Sie die aktuellen sichtbaren Grenzen der Karte
                     const bounds = map.getBounds();
                     console.log('bounds: ' + bounds);
+                    markerClusterGroupBike.clearLayers();
                     var count = 0;
-                    // Filtere die Leihstationen, die innerhalb der sichtbaren Grenzen liegen
+                    /*   var closestBikeStation = null;
+                       var closestBikeDistance = Infinity;*/
+                    // die Leihstationen, die innerhalb der sichtbaren Grenzen liegen
                     dataBike_rentals.filter(station => {
                         const coordinates = station.geom.coordinates;
                         const latLng = L.latLng(coordinates[1], coordinates[0]);
                         console.log('langlat: ' + latLng);
                         if (bounds.contains(latLng)) {
                             count++;
-                            setMarker(coordinates, icon)
+                            var marker = L.marker([coordinates[1], coordinates[0]], {icon: icon});
+                            marker.addTo(markerClusterGroupCharging);
+                            /*const distance = map.distance(map.getCenter(), latLng);
+                            if (distance < closestBikeDistance) {
+                                closestBikeDistance = distance;
+                                closestBikeStation = station;
+                            }*/
                         }
                     });
 
@@ -235,13 +256,23 @@
                     chart.series[0].update({
                         data: [count]
                     });
+
+                    /* if (closestBikeStation) {
+                         // Hier kannst du den Code hinzufügen, um die nächste Fahrradstation anzuzeigen
+                         // Du kannst eine Popup-Nachricht oder eine andere Art der Anzeige verwenden
+                         // Verwende die Daten von closestBikeStation, um den Inhalt der Anzeige zu generieren
+                         console.log('Nächste Fahrradstation:', closestBikeStation);
+                     }*/
                 }
 
                 function updateChartLadestationen(icon) {
                     // Holen Sie die aktuellen sichtbaren Grenzen der Karte
                     const bounds = map.getBounds();
                     console.log('bounds: ' + bounds);
+                    markerClusterGroupCharging.clearLayers();
                     var count = 0;
+                    /* var closestChargingStation = null;
+                     var closestChargingDistance = Infinity;*/
                     // Filtere die Leihstationen, die innerhalb der sichtbaren Grenzen liegen
                     dataCharging_stations.filter(station => {
                         const coordinates = station.geom.coordinates;
@@ -249,7 +280,13 @@
                         console.log('langlat: ' + latLng);
                         if (bounds.contains(latLng)) {
                             count++;
-                            setMarker(coordinates, icon)
+                            var marker = L.marker([coordinates[1], coordinates[0]], {icon: icon});
+                            marker.addTo(markerClusterGroupCharging);
+                            /*const distance = map.distance(map.getCenter(), latLng);*/
+                            /*if (distance < closestChargingDistance) {
+                                closestChargingDistance = distance;
+                                closestChargingStation = station;
+                            }*/
                         }
                     });
 
@@ -258,18 +295,87 @@
                     chart.series[1].update({
                         data: [count]
                     });
-                }
 
+                    /*if (closestChargingStation) {
+                        // Erstelle eine Popup-Nachricht mit den Informationen der nächsten Ladestation
+                        var popupContent = "<b>Nächste Ladestation</b><br>";
+                        popupContent += "operator: " + closestChargingStation.operator + "<br>";
+                        popupContent += "Capacity: " + closestChargingStation.capacity + "<br>";
+                        // Füge weitere Informationen hinzu, die du anzeigen möchtest
 
-                function setMarker(coordinates, icon) {
-                    var marker = L.marker([coordinates[1], coordinates[0]], {icon: icon});
-                    marker.addTo(map);
+                        // Erstelle ein Popup an den Koordinaten der nächsten Ladestation und füge den Inhalt hinzu
+                        var popup = L.popup()
+                            .setLatLng([closestChargingStation.geom.coordinates[1], closestChargingStation.geom.coordinates[0]])
+                            .setContent(popupContent)
+                            .openOn(map);
+                        console.log('Nächste Ladestation:', closestChargingStation);
+                    }*/
                 }
 
                 // Füge Leaflet-Kartenereignisse hinzu, um das Diagramm bei Kartenbewegungen/Zooms zu aktualisieren
                 map.on('moveend', function () {
                     updateChartLadestationen(ladestation_icon);
                     updateChartBike(bike_icon);
+                });
+
+                map.on('click', function (event) {
+                    // Erhalte die Koordinaten des Klickpunkts
+                    var clickedLatLng = event.latlng;
+
+                    // Berechne die nächste Fahrradstation
+                    var closestBikeStation = null;
+                    var closestBikeDistance = Infinity;
+
+                    dataBike_rentals.forEach(station => {
+                        const coordinates = station.geom.coordinates;
+                        const latLng = L.latLng(coordinates[1], coordinates[0]);
+                        const distance = clickedLatLng.distanceTo(latLng);
+                        if (distance < closestBikeDistance) {
+                            closestBikeDistance = distance;
+                            closestBikeStation = station;
+                        }
+                    });
+
+                    // Berechne die nächste Ladestation
+                    var closestChargingStation = null;
+                    var closestChargingDistance = Infinity;
+
+                    dataCharging_stations.forEach(station => {
+                        const coordinates = station.geom.coordinates;
+                        const latLng = L.latLng(coordinates[1], coordinates[0]);
+                        const distance = clickedLatLng.distanceTo(latLng);
+                        if (distance < closestChargingDistance) {
+                            closestChargingDistance = distance;
+                            closestChargingStation = station;
+                        }
+                    });
+
+                    // Aktualisiere das Diagramm und die Karte mit den gefundenen Ladestationen und Fahrradstationen
+                    updateChartLadestationen(ladestation_icon);
+                    updateChartBike(bike_icon);
+
+
+                    if (closestChargingStation) {
+                        if (closestBikeStation) {
+
+                            // Erstelle eine Popup-Nachricht für die nächste Ladestation
+                            var chargingPopupContent = "<b>Nächste Ladestation</b><br>";
+                            chargingPopupContent += "Operator: " + closestChargingStation.operator + "<br>";
+                            chargingPopupContent += "capacity: " + closestChargingStation.capacity + "<br>";
+                            chargingPopupContent += " ---  <br>";
+                            chargingPopupContent += "<b>Nächste Fahrradstation</b><br>";
+                            chargingPopupContent += "Name: " + closestBikeStation.name + "<br>";
+                            chargingPopupContent += "capacity: " + closestBikeStation.capacity + "<br>";
+                            chargingPopupContent += "Website: " + closestBikeStation.website + "<br>";
+                            // Füge weitere Informationen hinzu, die du anzeigen möchtest
+
+                            var chargingPopup = L.popup()
+                                .setLatLng([closestChargingStation.geom.coordinates[1], closestChargingStation.geom.coordinates[0]])
+                                .setContent(chargingPopupContent)
+                                .openOn(map);
+                            console.log('Nächste Ladestation:', closestChargingStation);
+                        }
+                    }
                 });
 
             </script>

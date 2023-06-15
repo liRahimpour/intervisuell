@@ -49,13 +49,13 @@ const fahrradverleih = L.tileLayer.wms('http://localhost:8084/geoserver/wms', {
     transparent: true,
     icon: myIcon,
     attribution: '... </a>'
-}).addTo(map);
+});
 
 
 
 const ladestation = new L.OverPassLayer({
     'query': '(node({{bbox}})["amenity"="charging_station"];);out qt;', minZoom: 5
-}).addTo(map);
+});
 
 
 const fahrradwege = L.tileLayer.wms('http://localhost:8084/geoserver/wms', {
@@ -65,7 +65,7 @@ const fahrradwege = L.tileLayer.wms('http://localhost:8084/geoserver/wms', {
     maxZoom: 20,
     transparent: true,
     attribution: '... </a>'
-});
+}).addTo(map);
 
 const supermarkt = L.tileLayer.wms('http://localhost:8084/geoserver/wms', {
     layers: 'mainz:Supermarkt',
