@@ -14,14 +14,9 @@ public class ChargingStationServiceImpl implements ChargingStationService {
     @Autowired
     private ChargingStationRepository chargingStationRepository;
 
-    //TODO: entity ändern
     public List<ChargingStation> findAll() {
         return chargingStationRepository.findAll();
     }
-    //todo
-   /* @Override
-    public List<BikeRental> bikeRentalSearchAfterRating(float rating) {
-        return bikeRentalRepository.findBikeRentalsByRatingGreaterThanEqual(rating);
-    }*/
+
 
 }

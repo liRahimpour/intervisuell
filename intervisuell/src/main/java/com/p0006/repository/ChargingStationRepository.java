@@ -10,8 +10,5 @@ import java.util.List;
 @Repository
 public interface ChargingStationRepository extends JpaRepository<ChargingStation, Long> {
     List<ChargingStation> findAll();
-/*
-    List<BikeRental> findBikeRentalsByRatingGreaterThanEqual(float rating);
-*/
 
 }

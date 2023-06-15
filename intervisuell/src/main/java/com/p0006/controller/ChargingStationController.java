@@ -23,9 +23,4 @@ public class ChargingStationController {
         return chargingStationService.findAll();
     }
 
-    /*@GetMapping("/rating")
-    List<BikeRental> getBikeRentalsWithRating(@RequestParam("rating") float rating) {
-        return bikeRentalService.bikeRentalSearchAfterRating(rating);
-    }*/
-
 }
