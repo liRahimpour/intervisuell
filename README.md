@@ -24,7 +24,7 @@ Folgende Schritte sind erforderlich, um das Projekt lokal auszuführen:
 Weitere Informationen zur Installation und Konfiguration findest du in den entsprechenden Komponentendokumentationen.
 
 ## Komponentendokumentation
-
+![Beschreibung des Bildes](Pfad/zum/Bild.jpg)
 ### Backend
 
 Beschreibung und Anleitung zur Verwendung des Backend-Moduls.
