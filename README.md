@@ -11,7 +11,7 @@ Das Projekt umfasst die Entwicklung einer interaktiven Visualisierungslösung, d
 
 Folgende Schritte sind erforderlich, um das Projekt lokal auszuführen:
 
-1. Stelle sicher, dass Docker und Docker Compose auf deinem System installiert sind.
+1. Stelle sicher, dass [Docker und Docker Compose](https://docs.docker.com/desktop/) auf deinem System installiert sind.
 2. Klone das Projekt-Repository von GitHub: `git clone https://github.com/liRahimpour/intervisuell.git`
 3. Gehe in das Projektverzeichnis: `cd intervisuell/iv-dev-dockercompose`
 4. Führe das BashScript `build.sh` aus
