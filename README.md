@@ -118,7 +118,7 @@ Die Konfigurationsdatei ermöglicht es Ihnen, Container mit verschiedenen Images
 
 ## Screencast und Abgabe
 
-Module: [Abgabe-Ordner](/iv-doc)
+Module: [Abgabe-Ordner](/iv-doc/abgabe)
 
 - [Build Prozess Screencast](https://drive.google.com/file/d/1JooDVqHsKrsUFiw8UiG6pjmmFccEeMzY/view?usp=sharing)
 - [Komponente Screencast](https://drive.google.com/file/d/1_Bk4ipjtd0385tca2hWKfGBUKiZ8Am1-/view?usp=sharing)
