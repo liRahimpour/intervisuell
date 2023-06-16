@@ -7,6 +7,23 @@ Die Karte zeigt Ihnen die besten Orte zum Parken und Aufladen Ihres Elektrofahrz
 Das Projekt umfasst die Entwicklung einer interaktiven Visualisierungslösung, die verschiedene Komponenten umfasst. Diese Komponenten arbeiten zusammen, um Daten aus einer PostGIS-Datenbank, Geoserver und weitere Quellen abzurufen und über eine webbasierte Benutzeroberfläche darzustellen.
 
 ![Technologie-Stack](iv-doc/techno.png)
+
+Inhaltsverzeichnis
+=================
+
+- [EcoMaps](#ecomaps)
+  - [Installation](#installation)
+  - [Komponentendokumentation](#komponentendokumentation)
+    - [Backend](#backend)
+    - [Datenbank (PostgreSQL)](#postgresql)
+    - [Geoserver](#geoserver)
+    - [Datenbank Managment System (pgAdmin)](#pgadmin)
+    - [Frontend (Portal)](#portal)
+    - [Deployment (Docker Compose)](#deployment-docker-compose)
+  - [Screencast und Abgabe](#screencast-und-abgabe)
+  - [Lizenz](#lizenz)
+
+
 ## Installation
 
 Folgende Schritte sind erforderlich, um das Projekt lokal auszuführen:
@@ -99,7 +116,7 @@ Docker Compose ist ein Werkzeug ([Container-Orchestrierung](https://www.redhat.c
 
 Die Konfigurationsdatei ermöglicht es Ihnen, Container mit verschiedenen Images, Umgebungsvariablen, Netzwerkeinstellungen, Volumes etc. zu erstellen. Man kann auch die Kommunikation und Abhängigkeiten zwischen den Containern festlegen.
 
-### Screencast und Abgabe
+## Screencast und Abgabe
 
 Module: [Abgabe-Ordner](/iv-doc)
 
