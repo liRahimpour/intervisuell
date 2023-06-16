@@ -95,7 +95,7 @@ const supermarkt = L.tileLayer.wms('http://localhost:8084/geoserver/wms', {
 
 ### pgAdmin
 
-Module: [wird über dockercompose Datei deployt unter services -> intervisuell-pgadmin](/iv-dev-dockercompose/docker-compose.yml)
+Module: [wird über dockercompose Datei deployt unter services -> intervisuell-pgadmin](https://github.com/liRahimpour/intervisuell/blob/2c27de14c0100698b61d45d6f88262c2b4047501/iv-dev-dockercompose/docker-compose.yml#L64)
 
 Das Datenbankmanagementsystem pgAdmin wird verwendet, um die PostgreSQL-Datenbank zu initialisieren und zu verwalten. Es kann über den Port 8082 erreicht werden.
 - Zugriff über: http://localhost:8082
