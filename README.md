@@ -45,6 +45,9 @@ Module: [intervisuell](/intervisuell)
   - http://localhost:8083/api/v1/bike_rentals
   - http://localhost:8083/api/v1/charging_stations
 
+Die Daten sind als CSV-dateien unter `intervisuell/iv-dev-postgres/initdb`
+vorhanden ([ladestationen_.csv](https://github.com/liRahimpour/intervisuell/blob/f88ae1b1e153265d74555325d6f4897795e7b9ed/iv-dev-postgres/initdb/ladestationen_.csv) und [leihstationen.csv](https://github.com/liRahimpour/intervisuell/blob/f88ae1b1e153265d74555325d6f4897795e7b9ed/iv-dev-postgres/initdb/leihstationen.csv)). Sie müssen die daten beispielweise über PgAdmin in der jeweiligen Tabelle importieren.
+
 ### PostgreSQL
 
 Module: [iv-dev-postgres](/iv-dev-postgres)
