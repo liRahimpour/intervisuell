@@ -1,8 +1,20 @@
-Link zum Source Code auf Github (alle Module):
+----------------------------------------------------------------
+
+- Link zum Source Code auf Github (das gesamte projekt):
+
 https://github.com/liRahimpour/intervisuell
 
+----------------------------------------------------------------
 
+- Die Abgabe-Ordner:
 
-
-Die Abgabe-Ordner:
 https://github.com/liRahimpour/intervisuell/tree/develop/iv-doc/abgabe
+
+----------------------------------------------------------------
+
+- Die Dokumentation:
+
+https://github.com/liRahimpour/intervisuell/blob/develop/README.md
+
+----------------------------------------------------------------
+
