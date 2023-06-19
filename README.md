@@ -36,6 +36,9 @@ Folgende Schritte sind erforderlich, um das Projekt lokal auszuführen:
 
 ## Komponentendokumentation
 ![Architecture](iv-doc/arc.png)
+
+[Das projekt-Repository](https://github.com/liRahimpour/intervisuell)
+
 ### Backend
 
 Das Backend wurde mit Java Spring Boot, Hibernate und Maven entwickelt. Es stellt zwei Endpunkte bereit, die Daten aus der PostGIS-Datenbank abrufen und als JSON an das Frontend weitergeben. Die Endpunkte sind wie folgt erreichbar:
