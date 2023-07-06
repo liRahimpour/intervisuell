@@ -133,7 +133,8 @@ Pfad: [Abgabe-Ordner](/iv-doc/abgabe)
 
 
 ## Lizenz
-
+![CC BY](iv-doc/by.svg) <br>
+Dieses Projekt ist lizenziert unter einer [Creative Commons Namensnennung 4.0](https://creativecommons.org/licenses/by/4.0/) International Lizenz.
 Das Projekt wurde im Rahmen des Fachs "Interaktive Visualisierung und Internet" an der Hochschule Mainz entwickelt.
 
 
